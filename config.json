@@ -1,0 +1,72 @@
+{
+    "site": {
+        "title": "Resume with Gandalf - Professional Templates",
+        "favicon": "images/favicon.ico",
+        "logo": {
+            "size": {
+                "width": 150,
+                "height": 150
+            },
+            "images": {
+                "light": "images/logo-light.png",
+                "dark": "images/logo-dark.png"
+            }
+        }
+    },
+    "showcase": {
+        "heading": "Resume Templates by Gandalf",
+        "intro": {
+            "text": "Welcome! Here you'll find resume templates designed with care by Gandalf to help you create a professional and effective resume. Each template is modern, easy to use, and ready for your personal information. Check out the demos.",
+            "contact": {
+                "telegram": "Telegram",
+                "telegram_url": "https://t.me/resumewithgandalf"
+            }
+        }
+    },
+    "templates": [
+        {
+            "id": "single-column",
+            "title": "Clear Single-Column",
+            "description": "A clean and focused single-column design. It's easy to read and great for a clear, concise resume. Gandalf helps make sure your details are presented well.",
+            "images": {
+                "light": "images/single-column-light.png",
+                "dark": "images/single-column-dark.png"
+            },
+            "demo_url": "public/demos/single-column.html"
+        },
+        {
+            "id": "two-column",
+            "title": "Modern Two-Column",
+            "description": "This template offers a balanced two-column layout. Use the sidebar for key info like contact details and skills, and the main area for your experience and projects. Designed with Gandalf's guidance for a smart look.",
+            "images": {
+                "light": "images/two-column-light.png",
+                "dark": "images/two-column-dark.png"
+            },
+            "demo_url": "public/demos/two-column.html"
+        },
+        {
+            "id": "creative",
+            "title": "Creative Template",
+            "description": "Inspired by modern portfolio styles , this template offers a visually engaging landing page that links to separate detailed sections. Perfect for making a strong first impression.",
+            "images": {
+                "light": "images/creative-template-light.png",
+                "dark": "images/creative-template-dark.png"
+            },
+            "demo_url": "public/demos/creative-cv.html"
+        },
+        {
+            "id": "custom",
+            "title": "Gandalf's Custom Designs",
+            "description": "Need a resume that's truly unique? Gandalf can help create a custom design tailored to your specific needs and personal style. Let's make a resume that perfectly tells your story.",
+            "images": {
+                "light": "images/custom-design-light.png",
+                "dark": "images/custom-design-dark.png"
+            },
+            "demo_url": "https://t.me/resumewithgandalf"
+        }
+    ],
+    "footer": {
+        "heading": "Welcome to My Template Archive!",
+        "subtext": "Further tales and treasures await..."
+    }
+} 

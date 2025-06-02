@@ -1,0 +1,316 @@
+/* styles.css - Improved Background Image & Content Integration */
+:root {
+    /* Light Mode - Middle-earth Tones */
+    --font-heading: 'Cinzel Decorative', serif;
+    --font-body: 'Merriweather', serif;
+
+    --bg-color-light: #FAF0E6; /* Fallback if image doesn't load */
+    --text-color-light: #5D4037; 
+    --card-bg-light: #FFF8DC; 
+    --card-border-light: #D2B48C; 
+    --desc-color-light: #6D4C41; 
+    --primary-color-light: #B8860B; 
+    --primary-hover-light: #CD853F; 
+    /* Semi-transparent background for the main content section in light mode */
+    --section-bg-light-rgba: rgba(252, 252, 252, 0.92); /* Linen/Parchment with opacity */
+    --logo-bg-light: rgba(241, 238, 222, 0.7); 
+    --bg-img-light: url('images/bg-light.png'); /* Ensure this path is correct */
+
+    /* Dark Mode - Middle-earth Tones */
+    --bg-color-dark: #3E2723; /* Fallback if image doesn't load */
+    --text-color-dark: #FFF8DC; 
+    --card-bg-dark: #4E342E; 
+    --card-border-dark: #6D4C41; 
+    --desc-color-dark: #D7CCC8; 
+    --primary-color-dark: #DAA520; 
+    --primary-hover-dark: #B8860B; 
+    /* Semi-transparent background for the main content section in dark mode */
+    --section-bg-dark-rgba: rgba(94, 72, 61, 0.92); /* Deep Dark Brown with opacity */
+    --logo-bg-dark: rgba(94, 74, 70, 0.7);
+    --bg-img-dark: url('images/bg-dark.png'); /* Ensure this path is correct */
+}
+
+/* Apply theme-specific variables */
+html:not([data-theme="dark"]) {
+    --bg-img: var(--bg-img-light);
+    --bg-color: var(--bg-color-light);
+    --text-color: var(--text-color-light);
+    --card-bg: var(--card-bg-light);
+    --card-border: var(--card-border-light);
+    --desc-color: var(--desc-color-light);
+    --primary-color: var(--primary-color-light);
+    --primary-hover: var(--primary-hover-light);
+    --section-bg-rgba: var(--section-bg-light-rgba); /* Use RGBA for section */
+    --logo-bg: var(--logo-bg-light);
+}
+html[data-theme="dark"] {
+    --bg-img: var(--bg-img-dark);
+    --bg-color: var(--bg-color-dark);
+    --text-color: var(--text-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --card-border: var(--card-border-dark);
+    --desc-color: var(--desc-color-dark);
+    --primary-color: var(--primary-color-dark);
+    --primary-hover: var(--primary-hover-dark);
+    --section-bg-rgba: var(--section-bg-dark-rgba); /* Use RGBA for section */
+    --logo-bg: var(--logo-bg-dark);
+}
+
+body {
+    background-color: var(--bg-color); /* Fallback if image fails */
+    color: var(--text-color);
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    
+    background-image: var(--bg-img);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    
+    position: relative;
+    min-height: 100vh;
+    z-index: 0; 
+}
+
+/* Overlay to help with text readability over the background image */
+body::before {
+    content: "";
+    position: fixed; 
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1; 
+    pointer-events: none;
+    transition: background 0.3s ease;
+}
+
+/* Overlay for light mode - subtle, allows image to show */
+html:not([data-theme="dark"]) body::before {
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.15), /* Very subtle light wash */
+        rgba(250, 240, 230, 0.25)  /* Subtle parchment tint */
+    );
+}
+
+/* Overlay for dark mode - subtle dark tint to enhance bg image in dark context */
+html[data-theme="dark"] body::before {
+    background: linear-gradient(
+        to bottom right,
+        rgba(10, 5, 0, 0.45),  /* Slightly darker brown, more transparent */
+        rgba(0, 0, 0, 0.35)     /* Darker, more transparent */
+    );
+}
+
+@media (max-width: 768px) { 
+    body {
+        background-attachment: scroll; 
+    }
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 1px solid var(--primary-color);
+    background: var(--card-bg); /* Button bg matches cards for consistency */
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1001; 
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+#theme-toggle:hover {
+    background: var(--primary-hover);
+    color: var(--card-bg);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+#theme-toggle i { font-size: 1.1em; }
+
+.logo-container {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1001; 
+    width: 150px; 
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    background-color: var(--logo-bg); /* Uses theme-switched variable */
+    border: 2px solid var(--primary-color);
+}
+.logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+.logo-light { display: block; }
+.logo-dark { display: none; }
+html[data-theme="dark"] .logo-light { display: none; }
+html[data-theme="dark"] .logo-dark { display: block; }
+
+/* Showcase Section */
+#resume-template-showcase {
+    background-color: var(--section-bg-rgba); /* Uses the RGBA variable for semi-transparency */
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    /* backdrop-filter: blur(2px); Optional: adds a blur to the bg seen through this section */
+    margin-top: 40px; 
+    margin-bottom: 40px;
+    padding: 40px 20px; 
+    position: relative; 
+    z-index: 1; 
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.title-image { object-fit: contain; vertical-align: middle; }
+.title-image.left { order: -1; }
+.title-image.right { order: 1; }
+
+#resume-template-showcase h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8em;
+    margin-bottom: 0; 
+    color: var(--text-color);
+}
+
+#resume-template-showcase .showcase-intro {
+    font-size: 1.1em;
+    color: var(--desc-color);
+    margin-bottom: 30px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+#resume-template-showcase .showcase-intro .contact-telegram {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+#resume-template-showcase .showcase-intro .contact-telegram a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+#resume-template-showcase .showcase-intro .contact-telegram a:hover {
+    color: var(--primary-hover);
+}
+#resume-template-showcase .showcase-intro .contact-telegram i {
+    margin-right: 8px;
+}
+
+.template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+.template-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 25px;
+    text-align: left;
+    box-shadow: 0 5px 15px var(--card-shadow); /* Use card shadow variable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+.template-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 8px 20px var(--card-shadow); /* Use card shadow variable */
+}
+
+.template-image-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.template-image-container img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    border: 1px solid var(--card-border);
+    background-color: var(--card-bg);
+    transition: transform 0.4s ease, opacity 0.3s ease;
+}
+.template-image-container img:hover { transform: scale(1.05); }
+.template-light { display: block; }
+.template-dark { display: none; }
+html[data-theme="dark"] .template-light { display: none; }
+html[data-theme="dark"] .template-dark { display: block; }
+
+.template-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.6em;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+.template-card p.template-description {
+    font-size: 0.95em;
+    color: var(--desc-color);
+    line-height: 1.65;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.template-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 20px;
+}
+.template-links a {
+    display: inline-flex; align-items: center; justify-content: center;
+    margin: 0 5px; padding: 12px 28px;
+    background-color: var(--primary-color);
+    color: var(--card-bg); 
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 0.95em; font-weight: bold;
+    transition: all 0.2s ease;
+    text-align: center; min-width: 150px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.template-links a:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.template-links a i { margin-right: 8px; } 
+
+/* Footer Styling */
+div[style*="padding: 50px"] { 
+    position: relative;
+    z-index: 1;
+    background-color: var(--section-bg-rgba); /* Use the semi-transparent variable */
+    color: var(--text-color);
+}
+/* No need for html[data-theme="dark"] div[style*="padding: 50px"] if using the variable */
+div[style*="padding: 50px"] p {
+    color: var(--desc-color);
+}

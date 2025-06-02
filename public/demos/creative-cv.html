@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title id="page-title">Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" id="favicon" href="" type="image/png">
+    <style>
+        /* Embedded styles from style.css */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+
+            /* Light Theme */
+            --page-bg-light: #f8f9fa;
+            --text-color-light: #212529;
+            --header-text-light: #1a202c;
+            --subtext-color-light: #4a5568;
+            --accent-color-light: #FBBF24; /* Yellow */
+            --border-color-light: #e2e8f0;
+
+            --resume-btn-bg-light: #FBBF24;
+            --resume-btn-text-light: #374151;
+            --resume-btn-hover-light: #F59E0B;
+
+            --projects-btn-bg-light: #EF4444;
+            --projects-btn-text-light: #ffffff;
+            --projects-btn-hover-light: #DC2626;
+
+            --contact-btn-bg-light: #3B82F6;
+            --contact-btn-text-light: #ffffff;
+            --contact-btn-hover-light: #2563EB;
+
+            --card-bg-light: #ffffff;
+            --card-shadow-light: rgba(0, 0, 0, 0.05);
+
+            /* Dark Theme */
+            --page-bg-dark: #1a202c;
+            --text-color-dark: #e2e8f0;
+            --header-text-dark: #f7fafc;
+            --subtext-color-dark: #a0aec0;
+            --accent-color-dark: #FBBF24;
+            --border-color-dark: #2d3748;
+
+            --resume-btn-bg-dark: #FBBF24;
+            --resume-btn-text-dark: #1a202c;
+            --resume-btn-hover-dark: #F59E0B;
+
+            --projects-btn-bg-dark: #EF4444;
+            --projects-btn-text-dark: #ffffff;
+            --projects-btn-hover-dark: #DC2626;
+
+            --contact-btn-bg-dark: #3B82F6;
+            --contact-btn-text-dark: #ffffff;
+            --contact-btn-hover-dark: #2563EB;
+
+            --card-bg-dark: #2d3748;
+            --card-shadow-dark: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Apply base theme (light) */
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--page-bg-light);
+            color: var(--text-color-light);
+        }
+        .bg-page-bg { background-color: var(--page-bg-light); }
+        .text-text-color { color: var(--text-color-light); }
+        .text-header-text { color: var(--header-text-light); }
+        .text-subtext-color { color: var(--subtext-color-light); }
+        .text-accent-color { color: var(--accent-color-light); }
+        .border-border-color { border-color: var(--border-color-light); }
+
+        .bg-resume-btn { background-color: var(--resume-btn-bg-light); }
+        .text-resume-btn-text { color: var(--resume-btn-text-light); }
+        .hover\\:bg-resume-btn-hover:hover { background-color: var(--resume-btn-hover-light); }
+
+        .bg-projects-btn { background-color: var(--projects-btn-bg-light); }
+        .text-projects-btn-text { color: var(--projects-btn-text-light); }
+        .hover\\:bg-projects-btn-hover:hover { background-color: var(--projects-btn-hover-light); }
+
+        .bg-contact-btn { background-color: var(--contact-btn-bg-light); }
+        .text-contact-btn-text { color: var(--contact-btn-text-light); }
+        .hover\\:bg-contact-btn-hover:hover { background-color: var(--contact-btn-hover-light); }
+
+        .bg-card { background-color: var(--card-bg-light); }
+        .card-shadow { box-shadow: 0 4px 6px -1px var(--card-shadow-light), 0 2px 4px -1px var(--card-shadow-light); }
+
+        /* Apply dark theme */
+        html.dark body {
+            background-color: var(--page-bg-dark);
+            color: var(--text-color-dark);
+        }
+        html.dark .bg-page-bg { background-color: var(--page-bg-dark); }
+        html.dark .text-text-color { color: var(--text-color-dark); }
+        html.dark .text-header-text { color: var(--header-text-dark); }
+        html.dark .text-subtext-color { color: var(--subtext-color-dark); }
+        html.dark .text-accent-color { color: var(--accent-color-dark); }
+        html.dark .border-border-color { border-color: var(--border-color-dark); }
+
+        html.dark .bg-resume-btn { background-color: var(--resume-btn-bg-dark); }
+        html.dark .text-resume-btn-text { color: var(--resume-btn-text-dark); }
+        html.dark .hover\\:bg-resume-btn-hover:hover { background-color: var(--resume-btn-hover-dark); }
+
+        html.dark .bg-projects-btn { background-color: var(--projects-btn-bg-dark); }
+        html.dark .text-projects-btn-text { color: var(--projects-btn-text-dark); }
+        html.dark .hover\\:bg-projects-btn-hover:hover { background-color: var(--projects-btn-hover-dark); }
+
+        html.dark .bg-contact-btn { background-color: var(--contact-btn-bg-dark); }
+        html.dark .text-contact-btn-text { color: var(--contact-btn-text-dark); }
+        html.dark .hover\\:bg-contact-btn-hover:hover { background-color: var(--contact-btn-hover-dark); }
+
+        html.dark .bg-card { background-color: var(--card-bg-dark); }
+        html.dark .card-shadow { box-shadow: 0 4px 6px -1px var(--card-shadow-dark), 0 2px 4px -1px var(--card-shadow-dark); }
+
+        /* --- General & Utility --- */
+        .min-h-screen-minus-header {
+            min-height: calc(100vh - 7rem); /* Adjust based on actual header height */
+        }
+        /* .nav-link class styling will be applied by JS directly */
+        .action-button {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            font-size: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .action-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+        /* .floating-icon-link class styling will be applied by JS directly */
+        .floating-icon-link i {
+            transition: color 0.2s ease;
+        }
+
+        /* Animation Utilities */
+        .animate-fade-in-down { opacity: 0; animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { opacity: 0; animation: fadeInUp 0.8s ease-out forwards; }
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-600 { animation-delay: 0.6s; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Page Specific Titles - Applied via Tailwind classes in HTML */
+        /* Project Card Styling - Applied via Tailwind classes in HTML or JS */
+        /* Contact Form Styling - Not used in index.html */
+
+        /* Print Styles */
+        @media print {
+            body { background-color: #ffffff !important; color: #000000 !important; font-family: 'Times New Roman', Times, serif; font-size: 11pt; }
+            header, footer, .no-print, #social-links-container { display: none !important; } /* Hide social links container including theme toggle */
+            .container { max-width: 100% !important; margin: 0 !important; padding: 1cm !important; }
+            .action-button { display: none; }
+            .profile-image { border-color: #cccccc !important; max-width: 150px !important; max-height: 150px !important; }
+            h1, h2, h3, p, a { color: #000000 !important; }
+            a { text-decoration: underline !important; }
+            .min-h-screen-minus-header { min-height: auto !important; }
+        }
+    </style>
+</head>
+<body class="bg-page-bg text-text-color font-primary transition-colors duration-300">
+
+    <header class="py-6 px-4 sm:px-8 fixed top-0 left-0 right-0 z-50 bg-page-bg/80 backdrop-blur-md shadow-sm">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-header-text">
+                <span class="text-accent-color">&#9679;</span> <span id="header-realname"></span>
+                <span class="font-light text-subtext-color text-lg hidden sm:inline" id="header-subtitle"></span>
+            </a>
+            <div class="space-x-4 sm:space-x-6 text-sm sm:text-base" id="nav-links">
+                </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto mt-28 lg:mt-32 px-4 sm:px-8 flex flex-col lg:flex-row items-center min-h-screen-minus-header">
+        <div class="w-full lg:w-2/5 flex justify-center lg:justify-end mb-10 lg:mb-0 lg:pr-10 xl:pr-16">
+            <img id="profile-image" class="profile-image rounded-full w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 object-cover shadow-2xl border-8 border-white dark:border-gray-700" src="https://placehold.co/400x400/cccccc/999999?text=Profile" alt="Profile image">
+        </div>
+
+        <div class="w-full lg:w-3/5 text-center lg:text-left">
+            <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold text-header-text mb-4 animate-fade-in-down" id="greeting"></h1>
+            <h2 class="text-xl sm:text-2xl font-semibold text-subtext-color mb-3 animate-fade-in-down animation-delay-200" id="subheading"></h2>
+            <p class="text-text-color leading-relaxed mb-10 max-w-md mx-auto lg:mx-0 animate-fade-in-up animation-delay-400" id="description"></p>
+            <div class="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6 animate-fade-in-up animation-delay-600" id="main-circles">
+                </div>
+        </div>
+    </main>
+
+    <div id="social-links-container" class="fixed left-2 sm:left-4 top-1/2 transform -translate-y-1/2 space-y-2 p-1.5 sm:p-2 bg-white dark:bg-gray-800 shadow-lg rounded-full no-print hidden md:flex flex-col z-40">
+        </div>
+
+    <footer class="text-center py-8 mt-12 text-subtext-color text-sm border-t border-border-color">
+        &copy; <span id="currentYear"></span> <span id="footer-name"></span>. All rights reserved.
+    </footer>
+
+    <script>
+        // Embedded configuration from index.config.json
+        const config = {
+            "page": {
+                "title": "Legolas - Elf Prince",
+                "favicon": "https://placehold.co/32x32/228B22/FFFFFF?text=LG"
+            },
+            "header": {
+                "name": "Legolas Greenleaf",
+                "subtitle": "My Story"
+            },
+            "navigation": {
+                "links": [
+                    {"text": "Resume", "url": "resume.html"},
+                    {"text": "Projects", "url": "projects.html"},
+                    {"text": "Publications", "url": "publications.html"}
+                ]
+            },
+            "main": {
+                "profile": {
+                    "image": "/images/legolas_profile.jpg", // This local path won't work in a single file demo without the image.
+                    "fallbackImage": "https://ui-avatars.com/api/?name=Legolas+Greenleaf&size=400&background=2E8B57&color=FFFFFF&bold=true",
+                    "altText": "Legolas"
+                },
+                "greeting": "Hello!",
+                "subheading": "A little bit about Me",
+                "description": "I am Legolas, an Elf from Mirkwood. I am good with a bow and have keen eyes. I like forests and stars. I was part of the group that helped Frodo, and I always try to help my friends and do what's right.",
+                "circles": [
+                    { "label": "Resume", "link": "resume.html", "class": "bg-resume-btn hover:bg-resume-btn-hover text-resume-btn-text" },
+                    { "label": "Projects", "link": "projects.html", "class": "bg-projects-btn hover:bg-projects-btn-hover text-projects-btn-text" },
+                    { "label": "Publications", "link": "publications.html", "class": "bg-contact-btn hover:bg-contact-btn-hover text-contact-btn-text" }
+                ]
+            },
+            "socialLinks": {
+                "github": "https://github.com/LegolasElf/ForestPath",
+                "linkedin": "https://linkedin.com/in/LegolasOfMirkwood",
+                "email": "legolas.greenleaf@mirkwood-forest.me",
+                "googleScholar": "https://scholar.middle-earth.org/citations?user=LegolasLore"
+            },
+            "footer": {
+                "lastUpdated": "Third Age, Year 3021" // Not used in index.html footer directly
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const htmlElement = document.documentElement;
+
+            // --- Theme Management ---
+            function applyTheme(isDark) {
+                const themeToggleButton = document.getElementById('theme-toggle-button');
+                const themeIcon = document.getElementById('theme-icon');
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    if (themeIcon) themeIcon.className = 'fas fa-sun'; // Show sun icon in dark mode
+                } else {
+                    htmlElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.className = 'fas fa-moon'; // Show moon icon in light mode
+                }
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+
+            function createThemeToggleButton() {
+                const socialLinksContainer = document.getElementById('social-links-container');
+                if (socialLinksContainer) {
+                    const button = document.createElement('button');
+                    button.id = 'theme-toggle-button';
+                    button.className = 'floating-icon-link p-2 text-subtext-color hover:text-accent-color transition-colors duration-200'; // Tailwind classes for floating icon
+                    button.setAttribute('aria-label', 'Toggle theme');
+                    
+                    const icon = document.createElement('i');
+                    icon.id = 'theme-icon';
+                    // Initial icon will be set by applyTheme
+                    button.appendChild(icon);
+
+                    button.addEventListener('click', () => {
+                        applyTheme(!htmlElement.classList.contains('dark'));
+                    });
+                    socialLinksContainer.appendChild(button);
+                }
+            }
+            
+            createThemeToggleButton(); // Create the button first
+
+            // Initial theme setup
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                applyTheme(true);
+            } else {
+                applyTheme(false); // This will also set the initial icon
+            }
+
+
+            // --- Helper Functions ---
+            function setText(elementId, text) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.textContent = text || '';
+                }
+            }
+
+            function setSrc(elementId, src, fallbackSrc) {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.src = src || fallbackSrc || '';
+                    if (src && fallbackSrc) { // Add onerror fallback for the primary image
+                        element.onerror = () => { element.src = fallbackSrc; element.onerror = null; };
+                    } else if (!src && fallbackSrc) { // If primary src is empty, use fallback directly
+                         element.src = fallbackSrc;
+                    }
+                }
+            }
+
+            // --- Populate Page Content ---
+            document.title = config.page.title;
+            const favicon = document.getElementById('favicon');
+            if (favicon) favicon.href = config.page.favicon;
+
+            // Header
+            setText('header-realname', config.header.name);
+            setText('header-subtitle', config.header.subtitle);
+
+            // Navigation
+            const navLinksContainer = document.getElementById('nav-links');
+            if (navLinksContainer) {
+                navLinksContainer.innerHTML = ''; // Clear existing
+                config.navigation.links.forEach(linkInfo => {
+                    const a = document.createElement('a');
+                    a.href = linkInfo.url;
+                    a.textContent = linkInfo.text;
+                    // Apply Tailwind classes for .nav-link from style.css
+                    a.className = 'text-subtext-color hover:text-accent-color transition-colors duration-200';
+                    if (linkInfo.active) { // This demo is index.html, so no specific active link from this config
+                        // a.classList.add('text-accent-color', 'font-semibold'); // Example active style
+                    }
+                    navLinksContainer.appendChild(a);
+                });
+            }
+
+            // Main Content
+            setSrc('profile-image', config.main.profile.image, config.main.profile.fallbackImage);
+            const profileImgElement = document.getElementById('profile-image');
+            if(profileImgElement) profileImgElement.alt = config.main.profile.altText;
+            
+            setText('greeting', config.main.greeting);
+            setText('subheading', config.main.subheading);
+            setText('description', config.main.description);
+
+            // Main Action Circles
+            const mainCirclesContainer = document.getElementById('main-circles');
+            if (mainCirclesContainer) {
+                mainCirclesContainer.innerHTML = '';
+                config.main.circles.forEach(circleInfo => {
+                    const a = document.createElement('a');
+                    a.href = circleInfo.link;
+                    a.textContent = circleInfo.label;
+                    a.className = `action-button ${circleInfo.class}`;
+                    mainCirclesContainer.appendChild(a);
+                });
+            }
+
+            // Social Links (excluding theme toggle, which is added separately)
+            const socialLinksDiv = document.getElementById('social-links-container'); // Target the container
+            if (socialLinksDiv) {
+                const sl = config.socialLinks;
+                const linksHtml = [
+                    sl.github ? `<a href="${sl.github}" target="_blank" rel="noopener noreferrer" class="floating-icon-link p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fab fa-github"></i></a>` : '',
+                    sl.linkedin ? `<a href="${sl.linkedin}" target="_blank" rel="noopener noreferrer" class="floating-icon-link p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fab fa-linkedin"></i></a>` : '',
+                    sl.email ? `<a href="mailto:${sl.email}" class="floating-icon-link p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fas fa-envelope"></i></a>` : '',
+                    sl.googleScholar ? `<a href="${sl.googleScholar}" target="_blank" rel="noopener noreferrer" class="floating-icon-link p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fas fa-graduation-cap"></i></a>` : ''
+                ].filter(Boolean).join('');
+                // Prepend social links before the theme toggle button if it's already there
+                const themeButton = socialLinksDiv.querySelector('#theme-toggle-button');
+                if (themeButton) {
+                    socialLinksDiv.insertAdjacentHTML('afterbegin', linksHtml);
+                } else {
+                     socialLinksDiv.innerHTML = linksHtml + socialLinksDiv.innerHTML;
+                }
+            }
+
+
+            // Footer
+            setText('footer-name', config.header.name);
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
