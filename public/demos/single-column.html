@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Your Name - Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" id="favicon" href="https://placehold.co/32x32/007ACC/FFFFFF?text=YR" type="image/png">
+    <style>
+        /* Content of style.css */
+        :root {
+            --primary-color: #2563EB; /* Default light theme primary */
+            --background-color: #F3F4F6; /* Default light theme background */
+            --text-color: #1F2937; /* Default light theme text */
+            --subtext-color: #4B5563; /* Default light theme subtext (gray-600) */
+            --card-background-color: #FFFFFF; /* Default light theme card background */
+            --separator-color: #E5E7EB; /* Default light theme separator (gray-200) */
+            --link-hover-color: #1D4ED8; /* Default light theme link hover (blue-700) */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            --primary-color: #3B82F6; /* Default dark theme primary */
+            --background-color: #1F2937; /* Default dark theme background */
+            --text-color: #F3F4F6; /* Default dark theme text */
+            --subtext-color: #9CA3AF; /* Default dark theme subtext (gray-400) */
+            --card-background-color: #374151; /* Default dark theme card background */
+            --separator-color: #4B5563; /* Default dark theme separator (gray-600) */
+            --link-hover-color: #60A5FA; /* Default dark theme link hover (blue-400) */
+        }
+
+        /* Apply variables to Tailwind utility classes if needed, or use them directly in custom CSS */
+        .text-primary-color {
+            color: var(--primary-color);
+        }
+        .bg-primary-color {
+            background-color: var(--primary-color);
+        }
+        .border-primary-color {
+            border-color: var(--primary-color);
+        }
+        .hover\:text-primary-color-darker:hover {
+            color: var(--link-hover-color);
+        }
+
+
+        .bg-card-bg {
+            background-color: var(--card-background-color);
+        }
+
+        .text-text-color {
+            color: var(--text-color);
+        }
+
+        .text-subtext-color {
+            color: var(--subtext-color);
+        }
+
+        .border-separator-color {
+            border-color: var(--separator-color);
+        }
+
+        /* Print Styles - Already included in inline style in HTML, but good to have here too */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+                background-color: #FFFFFF !important; /* Ensure white background for print */
+                color: #000000 !important; /* Ensure black text for print */
+            }
+            .no-print {
+                display: none !important;
+            }
+            .shadow-lg, .shadow-md {
+                box-shadow: none !important;
+            }
+            a {
+                text-decoration: underline;
+                color: #000000 !important;
+            }
+            /* Override theme colors for print */
+            .text-primary-color, .bg-primary-color, .border-primary-color {
+                color: #000000 !important;
+                background-color: transparent !important;
+                border-color: #000000 !important;
+            }
+            .bg-card-bg {
+                background-color: #FFFFFF !important;
+            }
+            .text-text-color, .text-subtext-color {
+                 color: #000000 !important;
+            }
+            .border-separator-color {
+                border-color: #dddddd !important;
+            }
+            #theme-toggle {
+                display: none !important;
+            }
+        }
+
+        /* Ensure icons in contact info are consistently sized and aligned */
+        #contactInfo svg {
+            width: 1em; /* or 16px */
+            height: 1em; /* or 16px */
+            margin-right: 0.25rem; /* Tailwind's mr-1 */
+            flex-shrink: 0; /* Prevent icons from shrinking if text is long */
+        }
+
+        #contactInfo a, #contactInfo span {
+            display: inline-flex; /* Helps with vertical alignment of icon and text */
+            align-items: center;
+        }
+
+        /* Style for section titles */
+        .section-title {
+            font-size: 1.5rem; /* Tailwind's text-2xl */
+            font-weight: 600; /* Tailwind's font-semibold */
+            color: var(--primary-color);
+            border-bottom-width: 2px;
+            border-color: var(--primary-color);
+            padding-bottom: 0.5rem; /* Tailwind's pb-2 */
+            margin-bottom: 1rem; /* Tailwind's mb-4 */
+        }
+
+        /* General list styling for resume sections */
+        .resume-list {
+            list-style-type: disc;
+            list-style-position: inside;
+            margin-left: 1rem; /* Tailwind's ml-4 */
+            font-size: 0.875rem; /* Tailwind's text-sm */
+            color: var(--text-color); /* Use text-color for main list items */
+        }
+        .resume-list li {
+            margin-bottom: 0.25rem; /* Tailwind's space-y-1 equivalent */
+        }
+        .resume-list strong { /* For highlighting parts of list items */
+            font-weight: 600; /* Tailwind's font-semibold */
+            color: var(--text-color); /* Ensure strong text is also readable */
+        }
+        .resume-list em { /* For journal names, etc. */
+             font-style: italic;
+        }
+
+        /* Specific styling for publication links */
+        .publication-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-left: 0.25rem;
+        }
+        .publication-link:hover {
+            text-decoration: underline;
+            color: var(--link-hover-color);
+        }
+    </style>
+</head>
+<body class="leading-relaxed transition-colors duration-300">
+    <div class="max-w-4xl mx-auto p-6 sm:p-10 shadow-lg rounded-lg my-6 bg-card-bg text-text-color">
+        <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-color bg-gray-200 dark:bg-gray-700 text-text-color no-print">
+            <svg id="theme-toggle-dark-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 10.607a1 1 0 011.414-1.414l-.707-.706a1 1 0 01-1.414 1.414l.707.706zM3 11a1 1 0 100-2H2a1 1 0 100 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+        </button>
+
+        <header class="text-center mb-8 border-b pb-6 border-separator-color">
+            <img id="profileImage" src="https://placehold.co/128x128/E0E7FF/4A5568?text=IMG" alt="Profile Picture"
+                 class="rounded-full w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 shadow-md object-cover">
+
+            <h1 id="userName" class="text-4xl sm:text-5xl font-bold text-primary-color"></h1>
+            <p id="userTagline" class="text-lg sm:text-xl text-subtext-color mt-2"></p>
+            <div id="contactInfo" class="mt-6 flex justify-center flex-wrap gap-x-4 sm:gap-x-6 gap-y-3 text-xs sm:text-sm text-subtext-color">
+            </div>
+        </header>
+
+        <main id="resumeMainContent">
+            </main>
+
+        <footer class="mt-8 pt-4 border-t border-separator-color text-center text-sm text-subtext-color">
+            <p>Last updated: <span id="lastUpdateTime"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Content of config.json as a JavaScript object
+        const embeddedConfigData = {
+          "personalInfo": {
+            "name": "Gimli, Son of Glóin",
+            "tagline": "Elf-friend, Lord of the Glittering Caves, Member of the Fellowship of the Ring",
+            "profileImage": "/images/gimli_profile.jpg",
+            "location": "Glittering Caves, Aglarond (Formerly Erebor)",
+            "phone": "By Raven Post or Horn Call",
+            "email": "",
+            "linkedin": "gimli-son-of-gloin",
+            "linkedinURL": "",
+            "github": "GimliStonehand",
+            "githubURL": "",
+            "googleScholar": "GimliLoreMaster",
+            "googleScholarURL": ""
+          },
+          "themeSettings": {
+            "light": {
+              "primaryColor": "#D4AF37",
+              "backgroundColor": "#F3F4F6",
+              "textColor": "#4A3B31",
+              "cardBackgroundColor": "#FFFFFF"
+            },
+            "dark": {
+              "primaryColor": "#E5C100",
+              "backgroundColor": "#2C1F18",
+              "textColor": "#EAE0D6",
+              "cardBackgroundColor": "#3E2E23"
+            }
+          },
+          "sections": {
+            "education": [
+              {
+                "institution": "Halls of Erebor, The Lonely Mountain",
+                "degree": "Master of Axe Combat, Mining, and Gem-lore",
+                "period": "Formative Years – Adulthood",
+                "gpa": "Peak Dwarven Craftsmanship & Martial Prowess",
+                "details": [
+                  "Relevant Coursework: Advanced Axe Fighting, Defensive Formations, Ore Identification, Gemstone Appraisal, Khuzdul Literature, History of the Durin's Folk.",
+                  "Academic Honors: Esteemed Son of Glóin, Recognized Master Craftsman."
+                ]
+              }
+            ],
+            "experience": [
+              {
+                "title": "Representative of the Dwarves & Member of the Fellowship of the Ring",
+                "organization": "The Council of Elrond, Rivendell",
+                "period": "October T.A. 3018 – March T.A. 3019",
+                "responsibilities": [
+                  "Actively participated in the Council of Elrond, offering the strength and counsel of the Dwarves.",
+                  "Swore allegiance to protect the Ring-bearer, Frodo Baggins, on the perilous quest to destroy the One Ring.",
+                  "Ventured through Moria, Lothlórien, and across the Anduin, facing Orcs, Wargs, and the Balrog of Moria.",
+                  "Forged an unprecedented friendship with Legolas Greenleaf, an Elf of Mirkwood, bridging ancient divides."
+                ]
+              },
+              {
+                "title": "Distinguished Warrior in the War of the Ring",
+                "organization": "Forces of the Free Peoples of Middle-earth",
+                "period": "February T.A. 3019 – March T.A. 3019",
+                "responsibilities": [
+                  "Fought with exceptional bravery and skill at the Battle of Helm's Deep, defending the Hornburg and competing with Legolas in an Orc-slaying contest ( victor by one).",
+                  "Journeyed through the Paths of the Dead with Aragorn, Legolas, and the Grey Company.",
+                  "Participated decisively in the Battle of the Pelennor Fields, aiding the victory against the forces of Mordor.",
+                  "Stood defiant before the Black Gate of Mordor at the Battle of the Morannon, drawing out Sauron's armies."
+                ]
+              },
+              {
+                "title": "Lord of the Glittering Caves",
+                "organization": "Dwarven Colony of Aglarond, Rohan",
+                "period": "Post T.A. 3019 – F.A. 120",
+                "responsibilities": [
+                  "Led a contingent of Dwarves from Erebor to establish a new settlement in the magnificent caverns behind Helm's Deep.",
+                  "Governed the Glittering Caves of Aglarond, overseeing the crafting of marvels in stone and gem that enhanced its natural beauty.",
+                  "Fostered strong relations between the Dwarves of Aglarond and the Men of Rohan, and the Reunited Kingdom.",
+                  "Ensured the prosperity and security of his people for many decades."
+                ]
+              }
+            ],
+            "projects": [
+              {
+                "name": "The Great Works of Aglarond",
+                "type": "Lordship & Master Craftsmanship Project",
+                "period": "Early Fourth Age",
+                "link": "#",
+                "description": "The establishment and beautification of the Dwarven colony in the Glittering Caves, including the forging of new gates of mithril and steel for Minas Tirith.",
+                "features": [
+                  "Development of breathtaking halls, stairways, and jeweled caverns.",
+                  "Creation of renowned works of Dwarven smithing and masonry, sought after across Middle-earth."
+                ],
+                "technologies": "Masterful Stonework, Gem-cutting, Smithing, Dwarven Engineering, Leadership"
+              },
+              {
+                "name": "Preservation of the Beard (Personal Ongoing Project)",
+                "type": "Personal Grooming & Dwarven Tradition",
+                "period": "Lifelong",
+                "link": "#",
+                "description": "Meticulous care, braiding, and adornment of a magnificent Dwarven beard, a symbol of pride and status.",
+                "features": [
+                  "Intricate braiding patterns.",
+                  "Occasional incorporation of fine wires or gems (rumored)."
+                ],
+                "technologies": "Comb, Brush, Dwarven Hair Tonics, Patience"
+              }
+            ],
+            "skills": {
+              "programmingLanguages": "Axe Proficiency (Two-handed & One-handed Master), Wrestling (Expert), Orcish (Functional for battle cries), Khuzdul (Native)",
+              "frameworksLibraries": "Dwarven Battle Tactics (Shield Wall, Phalanx), Gemstone Valuation Codex, Mining & Vein-following Principles",
+              "toolsTechnologies": "Battle Axe (Primary), Throwing Axes, Mattock, Pickaxe, Smith's Hammer, Jeweler's Loupe, Horn of Helm Hammerhand (borrowed)",
+              "laboratoryTechniques": "Ore Assaying, Structural Integrity Assessment (Stone), Ale Quality Testing",
+              "bioinformaticsTools": "Ancient Rune Interpretation (Basic), Lineage Tracking (Durin's Folk)",
+              "languages": "Khuzdul (Native), Westron (Fluent), Sindarin (Conversational, surprisingly good for a Dwarf), Rohirric (Understood)"
+            },
+            "publications": [
+              {
+                "authors": "<strong>Gimli</strong>, Son of Glóin (as recounted to scribes)",
+                "year": "Late Third Age / Early Fourth Age",
+                "title": "\"The Wonders of the Glittering Caves: A Description for Elves and Men.\"",
+                "journal": "<em>Oral Tradition, excerpts possibly in the Red Book of Westmarch</em>",
+                "link": "#",
+                "linkText": "[Oral Account]"
+              },
+              {
+                "authors": "<strong>Gimli</strong> & Legolas Greenleaf",
+                "year": "Circa T.A. 3019",
+                "title": "\"A Friendly Wager: An Account of Orc-Slaying at Helm's Deep.\"",
+                "journal": "<em>Personal Correspondence & Widely Spread Tale</em>",
+                "link": "",
+                "linkText": ""
+              }
+            ],
+            "awards": [
+                { "name": "Elf-friend (Bestowed by Lady Galadriel of Lothlórien)" },
+                { "name": "Key Member of the Fellowship of the Ring (Acknowledged by all Free Peoples)" },
+                { "name": "Lord of the Glittering Caves (By acclaim of his people and treaty with Rohan & Gondor)" },
+                { "name": "Victor of the Helm's Deep Orc-Slaying Contest (Score: 42)" }
+            ],
+            "extracurricular": [
+                {
+                    "role": "Esteemed Companion to Legolas Greenleaf",
+                    "period": "T.A. 3019 - F.A. 120",
+                    "description": "Traveled extensively with Legolas, visiting Fangorn Forest and the Glittering Caves, fostering inter-species understanding. Ultimately sailed with him to Valinor."
+                },
+                {
+                    "role": "Advisor on Stonework and Fortifications",
+                    "period": "Early Fourth Age",
+                    "description": "Consulted on the rebuilding and enhancement of fortifications in Gondor, notably the new gates of Minas Tirith."
+                },
+                {
+                    "role": "Chronicler of Dwarven Traditions (Informal)",
+                    "period": "Throughout Life",
+                    "description": "Keen to share the history, songs, and customs of the Dwarves with trusted friends."
+                }
+            ]
+          },
+          "footer": {
+            "lastUpdated": "F.A. 120 (Upon sailing to Valinor)"
+          }
+        };
+
+        // Content of main.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            let configData = {}; // To store loaded config
+
+            // Function to apply theme based on config
+            function applyThemeColors(theme) {
+                const root = document.documentElement;
+                root.style.setProperty('--primary-color', theme.primaryColor);
+                root.style.setProperty('--background-color', theme.backgroundColor);
+                root.style.setProperty('--text-color', theme.textColor);
+                root.style.setProperty('--subtext-color', theme.subtextColor || (theme.textColor === '#F3F4F6' ? '#9CA3AF' : '#4B5563')); // Fallback for subtext
+                root.style.setProperty('--card-background-color', theme.cardBackgroundColor);
+                root.style.setProperty('--separator-color', theme.separatorColor || (theme.backgroundColor === '#1F2937' ? '#4B5563' : '#E5E7EB')); // Fallback for separator
+                root.style.setProperty('--link-hover-color', theme.linkHoverColor || (theme.primaryColor === '#3B82F6' ? '#60A5FA' : '#1D4ED8')); // Fallback for link hover
+            }
+
+            // Function to set the theme (light/dark)
+            function setTheme(isDark) {
+                if (isDark) {
+                    document.body.classList.add('dark-mode');
+                    themeToggleLightIcon.classList.remove('hidden');
+                    themeToggleDarkIcon.classList.add('hidden');
+                    if (configData.themeSettings) applyThemeColors(configData.themeSettings.dark);
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                    if (configData.themeSettings) applyThemeColors(configData.themeSettings.light);
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            // Check for saved theme preference or system preference
+            const preferredTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            // Initialize theme toggle button event listener
+            themeToggleButton.addEventListener('click', () => {
+                setTheme(!document.body.classList.contains('dark-mode'));
+            });
+
+            // Function to create contact items
+            function createContactItem(href, svgPath, text, target = "_blank") {
+                const link = document.createElement('a');
+                link.href = href;
+                link.className = 'hover:text-primary-color-darker flex items-center';
+                if (target) link.target = target;
+                link.rel = 'noopener noreferrer';
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', '16');
+                svg.setAttribute('height', '16');
+                svg.setAttribute('fill', 'currentColor');
+                svg.setAttribute('viewBox', '0 0 16 16');
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', svgPath);
+                svg.appendChild(path);
+
+                link.appendChild(svg);
+                link.appendChild(document.createTextNode(` ${text}`));
+                return link;
+            }
+
+            function createContactSpan(svgPath, text) {
+                const span = document.createElement('span');
+                span.className = 'flex items-center';
+
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.setAttribute('width', '16');
+                svg.setAttribute('height', '16');
+                svg.setAttribute('fill', 'currentColor');
+                svg.setAttribute('viewBox', '0 0 16 16');
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', svgPath);
+                if (svgPath === "M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.283 1.498l-.794 1.853a.5.5 0 0 0 .163.603l4.28 2.568a.5.5 0 0 0 .603.163l1.853-.794c.524-.162 1.075-.045 1.498.283l2.31 2.792c.329.423.329.974.163 1.498l-.794 1.853a1.745 1.745 0 0 1-2.61.163L1.885.511z") {
+                    path.setAttribute('fill-rule', 'evenodd');
+                }
+                svg.appendChild(path);
+
+                span.appendChild(svg);
+                span.appendChild(document.createTextNode(` ${text}`));
+                return span;
+            }
+
+            // Function to populate HTML with data from config
+            function populateResume(data) {
+                configData = data; // Store data for theme switcher
+                const pi = data.personalInfo;
+                document.getElementById('pageTitle').textContent = `${pi.name} - Resume`;
+                document.getElementById('favicon').href = pi.faviconPath || 'https://placehold.co/32x32/007ACC/FFFFFF?text=YR';
+                document.getElementById('profileImage').src = pi.profileImage || 'https://placehold.co/128x128/E0E7FF/4A5568?text=IMG';
+                document.getElementById('profileImage').alt = `${pi.name} - Profile Picture`;
+                document.getElementById('userName').textContent = pi.name;
+                document.getElementById('userTagline').textContent = pi.tagline;
+
+                const contactInfoDiv = document.getElementById('contactInfo');
+                contactInfoDiv.innerHTML = '';
+                if(pi.location) contactInfoDiv.appendChild(createContactSpan("M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6", pi.location));
+                if(pi.phone) contactInfoDiv.appendChild(createContactSpan("M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.283 1.498l-.794 1.853a.5.5 0 0 0 .163.603l4.28 2.568a.5.5 0 0 0 .603.163l1.853-.794c.524-.162 1.075-.045 1.498.283l2.31 2.792c.329.423.329.974.163 1.498l-.794 1.853a1.745 1.745 0 0 1-2.61.163L1.885.511z", pi.phone));
+                if(pi.email) contactInfoDiv.appendChild(createContactItem(`mailto:${pi.email}`, "M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z", pi.email, null));
+                if(pi.linkedin && pi.linkedinURL) contactInfoDiv.appendChild(createContactItem(pi.linkedinURL, "M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z", pi.linkedin));
+                if(pi.github && pi.githubURL) contactInfoDiv.appendChild(createContactItem(pi.githubURL, "M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8", pi.github));
+                if(pi.googleScholar && pi.googleScholarURL) contactInfoDiv.appendChild(createContactItem(pi.googleScholarURL, "M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0l7.5-3a.5.5 0 0 0 .025-.917l-7.5-3.5ZM4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466zm-.068 1.873.22-.748 3.496 1.311a.5.5 0 0 0 .352 0l3.496-1.311.22.748L8 12.46l-3.892-1.556Z", "Google Scholar"));
+
+                const mainContent = document.getElementById('resumeMainContent');
+                mainContent.innerHTML = '';
+
+                // Dynamically create sections
+                function createSection(title, items, itemRenderer) {
+                    if (!items || items.length === 0) return;
+
+                    const section = document.createElement('section');
+                    section.className = 'mb-8';
+                    const h2 = document.createElement('h2');
+                    h2.className = 'section-title';
+                    h2.textContent = title;
+                    section.appendChild(h2);
+
+                    items.forEach(itemData => {
+                        section.appendChild(itemRenderer(itemData));
+                    });
+                    mainContent.appendChild(section);
+                }
+
+                // Render Education items
+                createSection('Education', data.sections.education, edu => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-4';
+                    div.innerHTML = `
+                        <h3 class="text-lg font-semibold text-text-color">${edu.institution}</h3>
+                        <p class="text-md text-subtext-color">${edu.degree}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${edu.period}</p>
+                        ${edu.gpa ? `<p class="text-sm text-gray-500 dark:text-gray-400">${edu.gpa}</p>` : ''}
+                        <ul class="resume-list mt-1">
+                            ${edu.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    `;
+                    return div;
+                });
+
+                // Render Experience items
+                createSection('Experience', data.sections.experience, exp => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-6';
+                    div.innerHTML = `
+                        <h3 class="text-lg font-semibold text-text-color">${exp.title}</h3>
+                        <p class="text-md text-subtext-color">${exp.organization}</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${exp.period}</p>
+                        <ul class="resume-list mt-2">
+                            ${exp.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    `;
+                    return div;
+                });
+
+                // Render Projects items
+                createSection('Projects', data.sections.projects, proj => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-6';
+                    div.innerHTML = `
+                        <h3 class="text-lg font-semibold text-text-color">${proj.name}
+                            ${proj.link && proj.link !== "#" ? `<a href="${proj.link}" target="_blank" rel="noopener noreferrer" class="publication-link text-sm ml-2">[Link]</a>` : ''}
+                        </h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${proj.type} | ${proj.period}</p>
+                        <p class="mt-1 text-sm text-text-color">${proj.description}</p>
+                        <ul class="resume-list mt-1">
+                            ${proj.features.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                        <p class="mt-1 text-sm text-subtext-color"><strong>Technologies used:</strong> ${proj.technologies}</p>
+                    `;
+                    return div;
+                });
+
+                // Render Skills
+                if (data.sections.skills) {
+                    const skillsSection = document.createElement('section');
+                    skillsSection.className = 'mb-8';
+                    skillsSection.innerHTML = `<h2 class="section-title">Skills</h2><div id="skills-content" class="text-sm text-text-color space-y-1"></div>`;
+                    mainContent.appendChild(skillsSection);
+                    const skillsContent = document.getElementById('skills-content');
+                    for (const key in data.sections.skills) {
+                        const p = document.createElement('p');
+                        const titleCaseKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+                        p.innerHTML = `<strong class="text-text-color">${titleCaseKey}:</strong> ${data.sections.skills[key]}`;
+                        skillsContent.appendChild(p);
+                    }
+                }
+
+                // Render Publications
+                createSection('Publications & Presentations', data.sections.publications, pub => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-4';
+                    div.innerHTML = `
+                        <ul class="resume-list">
+                            <li class="mb-2">
+                                ${pub.authors} (${pub.year}). ${pub.title} ${pub.journal}
+                                ${pub.link && pub.linkText ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="publication-link">${pub.linkText}</a>` : ''}
+                            </li>
+                        </ul>
+                    `;
+                    return div;
+                });
+
+                // Render Awards
+                createSection('Awards & Honors', data.sections.awards, award => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-2';
+                    div.innerHTML = `
+                        <p class="text-md text-text-color">${award.name}</p>
+                    `;
+                    return div;
+                });
+
+                // Render Extracurricular
+                createSection('Extracurricular Activities', data.sections.extracurricular, activity => {
+                    const div = document.createElement('div');
+                    div.className = 'mb-4';
+                    div.innerHTML = `
+                        <h3 class="text-lg font-semibold text-text-color">${activity.role}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${activity.period}</p>
+                        <p class="mt-1 text-sm text-text-color">${activity.description}</p>
+                    `;
+                    return div;
+                });
+
+                // Update the last update time from config
+                const lastUpdateTime = document.getElementById('lastUpdateTime');
+                if (lastUpdateTime && data.footer && data.footer.lastUpdated) {
+                    lastUpdateTime.textContent = data.footer.lastUpdated;
+                }
+
+                // Set initial theme after loading config
+                if (preferredTheme === 'dark' || (!preferredTheme && systemPrefersDark)) {
+                    setTheme(true);
+                } else {
+                    setTheme(false);
+                }
+            }
+
+            // Load data directly from the embedded object
+            try {
+                console.log('Using embedded config data.');
+                if (!embeddedConfigData || !embeddedConfigData.personalInfo) {
+                    throw new Error('Invalid data format in embedded config data');
+                }
+                populateResume(embeddedConfigData);
+            } catch (error) {
+                console.error('Error processing embedded resume data:', error);
+                console.error('Error details:', error.message);
+                document.getElementById('resumeMainContent').innerHTML = `
+                    <div class="text-red-500 text-center">
+                        <p>Could not load resume data. Please check console for errors.</p>
+                        <p class="text-sm mt-2">Error: ${error.message}</p>
+                    </div>`;
+            }
+        });
+    </script>
+</body>
+</html>

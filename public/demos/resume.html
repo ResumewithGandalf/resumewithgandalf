@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title id="page-title"></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" id="favicon" href="" type="image/png">
+    <style>
+        /* Embedded styles from style.css */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap');
+
+        :root {
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Merriweather', serif;
+
+            /* Light Theme */
+            --page-bg-light: #f8f9fa;
+            --text-color-light: #212529;
+            --header-text-light: #1a202c;
+            --subtext-color-light: #4a5568;
+            --accent-color-light: #FBBF24; /* Yellow */
+            --border-color-light: #e2e8f0;
+
+            --resume-btn-bg-light: #FBBF24;
+            --resume-btn-text-light: #374151;
+            --resume-btn-hover-light: #F59E0B;
+
+            --projects-btn-bg-light: #EF4444;
+            --projects-btn-text-light: #ffffff;
+            --projects-btn-hover-light: #DC2626;
+
+            --contact-btn-bg-light: #3B82F6;
+            --contact-btn-text-light: #ffffff;
+            --contact-btn-hover-light: #2563EB;
+
+            --card-bg-light: #ffffff;
+            --card-shadow-light: rgba(0, 0, 0, 0.05);
+
+            /* Dark Theme */
+            --page-bg-dark: #1a202c;
+            --text-color-dark: #e2e8f0;
+            --header-text-dark: #f7fafc;
+            --subtext-color-dark: #a0aec0;
+            --accent-color-dark: #FBBF24;
+            --border-color-dark: #2d3748;
+
+            --resume-btn-bg-dark: #FBBF24;
+            --resume-btn-text-dark: #1a202c;
+            --resume-btn-hover-dark: #F59E0B;
+
+            --projects-btn-bg-dark: #EF4444;
+            --projects-btn-text-dark: #ffffff;
+            --projects-btn-hover-dark: #DC2626;
+
+            --contact-btn-bg-dark: #3B82F6;
+            --contact-btn-text-dark: #ffffff;
+            --contact-btn-hover-dark: #2563EB;
+
+            --card-bg-dark: #2d3748;
+            --card-shadow-dark: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--page-bg-light);
+            color: var(--text-color-light);
+        }
+        .bg-page-bg { background-color: var(--page-bg-light); }
+        .text-text-color { color: var(--text-color-light); }
+        .text-header-text { color: var(--header-text-light); }
+        .text-subtext-color { color: var(--subtext-color-light); }
+        .text-accent-color { color: var(--accent-color-light); }
+        .border-border-color { border-color: var(--border-color-light); }
+
+        .bg-resume-btn { background-color: var(--resume-btn-bg-light); }
+        .text-resume-btn-text { color: var(--resume-btn-text-light); }
+        .hover\\:bg-resume-btn-hover:hover { background-color: var(--resume-btn-hover-light); }
+
+        .bg-projects-btn { background-color: var(--projects-btn-bg-light); }
+        .text-projects-btn-text { color: var(--projects-btn-text-light); }
+        .hover\\:bg-projects-btn-hover:hover { background-color: var(--projects-btn-hover-light); }
+
+        .bg-contact-btn { background-color: var(--contact-btn-bg-light); }
+        .text-contact-btn-text { color: var(--contact-btn-text-light); }
+        .hover\\:bg-contact-btn-hover:hover { background-color: var(--contact-btn-hover-light); }
+
+        .bg-card { background-color: var(--card-bg-light); }
+        .card-shadow { box-shadow: 0 4px 6px -1px var(--card-shadow-light), 0 2px 4px -1px var(--card-shadow-light); }
+
+        html.dark body {
+            background-color: var(--page-bg-dark);
+            color: var(--text-color-dark);
+        }
+        html.dark .bg-page-bg { background-color: var(--page-bg-dark); }
+        html.dark .text-text-color { color: var(--text-color-dark); }
+        html.dark .text-header-text { color: var(--header-text-dark); }
+        html.dark .text-subtext-color { color: var(--subtext-color-dark); }
+        html.dark .text-accent-color { color: var(--accent-color-dark); }
+        html.dark .border-border-color { border-color: var(--border-color-dark); }
+
+        html.dark .bg-resume-btn { background-color: var(--resume-btn-bg-dark); }
+        html.dark .text-resume-btn-text { color: var(--resume-btn-text-dark); }
+        html.dark .hover\\:bg-resume-btn-hover:hover { background-color: var(--resume-btn-hover-dark); }
+
+        html.dark .bg-projects-btn { background-color: var(--projects-btn-bg-dark); }
+        html.dark .text-projects-btn-text { color: var(--projects-btn-text-dark); }
+        html.dark .hover\\:bg-projects-btn-hover:hover { background-color: var(--projects-btn-hover-dark); }
+
+        html.dark .bg-contact-btn { background-color: var(--contact-btn-bg-dark); }
+        html.dark .text-contact-btn-text { color: var(--contact-btn-text-dark); }
+        html.dark .hover\\:bg-contact-btn-hover:hover { background-color: var(--contact-btn-hover-dark); }
+
+        html.dark .bg-card { background-color: var(--card-bg-dark); }
+        html.dark .card-shadow { box-shadow: 0 4px 6px -1px var(--card-shadow-dark), 0 2px 4px -1px var(--card-shadow-dark); }
+
+        /* Animation Utilities - Applied by Tailwind classes in HTML */
+        .animate-fade-in-down { opacity: 0; animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-fade-in-up { opacity: 0; animation: fadeInUp 0.8s ease-out forwards; }
+        .animation-delay-200 { animation-delay: 0.2s; }
+        .animation-delay-400 { animation-delay: 0.4s; }
+        .animation-delay-600 { animation-delay: 0.6s; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print Styles */
+        @media print {
+            body { background-color: #ffffff !important; color: #000000 !important; font-family: 'Times New Roman', Times, serif; font-size: 11pt; }
+            header, footer, .no-print, #social-links { display: none !important; }
+            .container { max-width: 100% !important; margin: 0 !important; padding: 1cm !important; }
+            h1, h2, h3, p, a, li { color: #000000 !important; }
+            a { text-decoration: underline !important; }
+            .bg-card { background-color: #ffffff !important; border: 1px solid #eeeeee; }
+            .card-shadow { box-shadow: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-page-bg text-text-color font-primary transition-colors duration-300">
+    <header class="py-6 px-4 sm:px-8 fixed top-0 left-0 right-0 z-50 bg-page-bg/80 backdrop-blur-md shadow-sm">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-header-text" id="header-name-link">
+                <span class="text-accent-color">&#9679;</span> <span id="header-name"></span>
+            </a>
+            <div class="space-x-4 sm:space-x-6 text-sm sm:text-base" id="nav-links"></div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto mt-28 lg:mt-32 px-4 sm:px-8 py-8">
+        <h1 class="animate-fade-in-down" id="main-title"></h1> <div class="max-w-4xl mx-auto mb-12 animate-fade-in-down animation-delay-200">
+            <div class="bg-card p-6 rounded-lg card-shadow flex flex-col sm:flex-row items-center justify-between" id="download-section">
+                </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+            <section class="mb-12 animate-fade-in-up animation-delay-200" id="experience-section">
+                <h2 class="text-2xl font-bold text-header-text mb-6">Experience</h2>
+                <div class="space-y-6" id="experience-list">
+                    </div>
+            </section>
+
+            <section class="mb-12 animate-fade-in-up animation-delay-400" id="education-section">
+                <h2 class="text-2xl font-bold text-header-text mb-6">Education</h2>
+                <div class="bg-card p-6 rounded-lg card-shadow" id="education-card">
+                    </div>
+            </section>
+
+            <section class="animate-fade-in-up animation-delay-600" id="skills-section">
+                <h2 class="text-2xl font-bold text-header-text mb-6">Skills</h2>
+                <div class="bg-card p-6 rounded-lg card-shadow">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="skills-grid">
+                        </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="social-links" class="fixed left-2 sm:left-4 top-1/2 transform -translate-y-1/2 space-y-2 p-1.5 sm:p-2 bg-white dark:bg-gray-800 shadow-lg rounded-full no-print hidden md:flex flex-col z-40">
+        </div>
+
+    <footer class="text-center py-8 text-subtext-color text-sm border-t border-border-color">
+        Last updated: <span id="lastUpdate"></span>
+    </footer>
+
+    <script>
+        // Embedded configuration from resume.config.json
+        const config = {
+            "page": {
+                "title": "My Path - Legolas",
+                "favicon": "https://placehold.co/32x32/228B22/FFFFFF?text=LG"
+            },
+            "header": {
+                "name": "Legolas Greenleaf"
+            },
+            "navigation": {
+                "links": [
+                    {"text": "Home", "url": "creative-cv.html"},
+                    {"text": "Resume", "url": "resume.html", "active": true},
+                    {"text": "Projects", "url": "projects.html"},
+                    {"text": "Publications", "url": "publications.html"}
+                ]
+            },
+            "main": {
+                "title": "My Path",
+                "downloadSection": {
+                    "title": "See My Story",
+                    "description": "You can see a short list of my deeds from the Elves' records.",
+                    "button": {
+                        "text": "View My Record",
+                        "link": "https://elf-records.me/legolas-story"
+                    }
+                },
+                "experience": {
+                    "jobs": [
+                        {
+                            "title": "Prince and Defender",
+                            "company": "Mirkwood Forest Kingdom",
+                            "period": "Many Years - War of the Ring",
+                            "responsibilities": [
+                                "I was the main archer and scout, helping to keep our forest safe.",
+                                "I looked after the borders of Mirkwood, fighting spiders and other bad things.",
+                                "I spoke for Mirkwood at the big meeting in Rivendell about the One Ring."
+                            ]
+                        },
+                        {
+                            "title": "Fellowship Member and Warrior",
+                            "company": "The Fellowship of the Ring / Armies of the West",
+                            "period": "T.A. 3018 - T.A. 3019",
+                            "responsibilities": [
+                                "I was the Elf in the group helping Frodo. I used my bow and eyes to help.",
+                                "I helped protect Frodo from danger in places like Moria and Lothlórien.",
+                                "I fought hard in big battles like Helm's Deep and at the Black Gate."
+                            ]
+                        }
+                    ]
+                },
+                "education": {
+                    "degrees": [
+                        {
+                            "degree": "Elf Skills in Archery, Scouting, and Forest Ways",
+                            "school": "Mirkwood Royal Family and Many Years in the Wild",
+                            "period": "All My Life",
+                            "focus": "Learned Elf fighting ways, how to live in the wild, about plants and animals, and old songs."
+                        }
+                    ]
+                },
+                "skills": {
+                    "categories": {
+                        "technical": {
+                            "title": "Fighting and Forest Skills",
+                            "items": [
+                                "Very Good Archer",
+                                "Good with Two Knives",
+                                "Great Scout and Tracker",
+                                "Move Silently",
+                                "Good Eyesight and Hearing"
+                            ]
+                        },
+                        "soft": {
+                            "title": "Other Skills",
+                            "items": [
+                                "Loyal Friend",
+                                "Good at Talking with Others (even Dwarves!)",
+                                "Notice Things Well",
+                                "Speak Elf Languages and Common Tongue",
+                                "Strong and Don't Give Up Easily"
+                            ]
+                        }
+                    }
+                }
+            },
+            "socialLinks": {
+                "github": "https://github.com/LegolasElf/ForestPath",
+                "linkedin": "https://linkedin.com/in/LegolasOfMirkwood",
+                "email": "legolas.greenleaf@mirkwood-forest.me",
+                "googleScholar": "https://scholar.middle-earth.org/citations?user=LegolasLore"
+            },
+            "footer": {
+                "lastUpdated": "Third Age, Year 3021"
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const htmlElement = document.documentElement;
+
+            // --- Theme Management ---
+            function applyTheme(isDark) {
+                const themeToggleButton = document.getElementById('theme-toggle-button');
+                const themeIcon = document.getElementById('theme-icon');
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                    if (themeIcon) themeIcon.className = 'fas fa-sun fa-fw';
+                } else {
+                    htmlElement.classList.remove('dark');
+                    if (themeIcon) themeIcon.className = 'fas fa-moon fa-fw';
+                }
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            }
+
+            function createThemeToggleButton(container) {
+                if (container) {
+                    const button = document.createElement('button');
+                    button.id = 'theme-toggle-button';
+                    button.className = 'p-2 text-subtext-color hover:text-accent-color transition-colors duration-200';
+                    button.setAttribute('aria-label', 'Toggle theme');
+                    
+                    const icon = document.createElement('i');
+                    icon.id = 'theme-icon';
+                    button.appendChild(icon);
+
+                    button.addEventListener('click', () => {
+                        applyTheme(!htmlElement.classList.contains('dark'));
+                    });
+                    container.appendChild(button);
+                }
+            }
+            
+            const socialLinksContainer = document.getElementById('social-links');
+            createThemeToggleButton(socialLinksContainer);
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+
+            // --- Helper Functions ---
+            function setText(elementId, text) {
+                const element = document.getElementById(elementId);
+                if (element) element.textContent = text || '';
+            }
+            
+            function setHtml(elementId, htmlContent) {
+                 const element = document.getElementById(elementId);
+                if (element) element.innerHTML = htmlContent || '';
+            }
+
+
+            // --- Populate Page Content ---
+            document.title = config.page.title;
+            const favicon = document.getElementById('favicon');
+            if (favicon) favicon.href = config.page.favicon;
+
+            // Header & Navigation
+            setText('header-name', config.header.name);
+            const navLinksContainer = document.getElementById('nav-links');
+            if (navLinksContainer) {
+                navLinksContainer.innerHTML = '';
+                config.navigation.links.forEach(linkInfo => {
+                    const a = document.createElement('a');
+                    a.href = linkInfo.url;
+                    a.textContent = linkInfo.text;
+                    a.className = 'text-subtext-color hover:text-accent-color transition-colors duration-200';
+                    if (linkInfo.active) {
+                        a.classList.add('text-accent-color', 'font-semibold');
+                    }
+                    navLinksContainer.appendChild(a);
+                });
+            }
+            
+            // Social Links
+            if (socialLinksContainer && config.socialLinks) {
+                const sl = config.socialLinks;
+                const socialIconsHtml = [
+                    sl.github ? `<a href="${sl.github}" target="_blank" rel="noopener noreferrer" class="p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fab fa-github fa-fw"></i></a>` : '',
+                    sl.linkedin ? `<a href="${sl.linkedin}" target="_blank" rel="noopener noreferrer" class="p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fab fa-linkedin fa-fw"></i></a>` : '',
+                    sl.email ? `<a href="mailto:${sl.email}" class="p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fas fa-envelope fa-fw"></i></a>` : '',
+                    sl.googleScholar ? `<a href="${sl.googleScholar}" target="_blank" rel="noopener noreferrer" class="p-2 text-subtext-color hover:text-accent-color transition-colors duration-200"><i class="fas fa-graduation-cap fa-fw"></i></a>` : ''
+                ].filter(Boolean).join('');
+                 // Insert social icons before the theme toggle button
+                const themeButton = socialLinksContainer.querySelector('#theme-toggle-button');
+                if (themeButton) {
+                    themeButton.insertAdjacentHTML('beforebegin', socialIconsHtml);
+                } else {
+                    socialLinksContainer.innerHTML = socialIconsHtml + socialLinksContainer.innerHTML;
+                }
+            }
+
+            // Main Title
+            const mainTitleElement = document.getElementById('main-title');
+            if (mainTitleElement && config.main) {
+                mainTitleElement.textContent = config.main.title || 'Resume';
+                mainTitleElement.classList.add('text-4xl', 'sm:text-5xl', 'font-bold', 'text-header-text', 'mb-8', 'text-center');
+            }
+
+            // Download Section
+            const downloadSection = document.getElementById('download-section');
+            if (downloadSection && config.main && config.main.downloadSection) {
+                const ds = config.main.downloadSection;
+                downloadSection.innerHTML = `
+                    <div class="flex-grow mb-4 sm:mb-0 sm:mr-6 text-center sm:text-left">
+                        <h3 class="text-xl font-semibold text-header-text">${ds.title}</h3>
+                        <p class="text-subtext-color">${ds.description}</p>
+                    </div>
+                    <a href="${ds.button.link}" target="_blank" rel="noopener noreferrer"
+                       class="inline-block bg-accent-color text-white font-semibold py-3 px-6 rounded-md hover:opacity-90 transition-opacity duration-200 shadow-md">
+                        <i class="fas fa-download mr-2"></i>${ds.button.text}
+                    </a>
+                `;
+            }
+
+            // Experience Section
+            const experienceList = document.getElementById('experience-list');
+            if (experienceList && config.main && config.main.experience && config.main.experience.jobs) {
+                experienceList.innerHTML = '';
+                config.main.experience.jobs.forEach(job => {
+                    const jobDiv = document.createElement('div');
+                    jobDiv.className = 'bg-card p-6 rounded-lg card-shadow mb-6';
+                    jobDiv.innerHTML = `
+                        <h3 class="text-xl font-semibold text-header-text">${job.title}</h3>
+                        <p class="text-accent-color font-medium">${job.company}</p>
+                        <p class="text-subtext-color text-sm mb-3">${job.period}</p>
+                        <ul class="list-disc list-inside text-text-color space-y-1">
+                            ${job.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                        </ul>
+                    `;
+                    experienceList.appendChild(jobDiv);
+                });
+            }
+
+            // Education Section
+            const educationCard = document.getElementById('education-card');
+            if (educationCard && config.main && config.main.education && config.main.education.degrees) {
+                educationCard.innerHTML = '';
+                config.main.education.degrees.forEach(degree => {
+                    const degreeDiv = document.createElement('div');
+                    degreeDiv.innerHTML = `
+                        <h3 class="text-xl font-semibold text-header-text">${degree.degree}</h3>
+                        <p class="text-accent-color font-medium">${degree.school}</p>
+                        <p class="text-subtext-color text-sm mb-2">${degree.period}</p>
+                        <p class="text-text-color">${degree.focus}</p>
+                    `;
+                    educationCard.appendChild(degreeDiv);
+                });
+            }
+
+            // Skills Section
+            const skillsGrid = document.getElementById('skills-grid');
+            if (skillsGrid && config.main && config.main.skills && config.main.skills.categories) {
+                skillsGrid.innerHTML = '';
+                for (const categoryKey in config.main.skills.categories) {
+                    const category = config.main.skills.categories[categoryKey];
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.innerHTML = `
+                        <h3 class="text-lg font-semibold text-header-text mb-3">${category.title}</h3>
+                        <ul class="space-y-1">
+                            ${category.items.map(item => `<li class="flex items-center text-text-color"><span class="text-accent-color mr-2">&#10003;</span>${item}</li>`).join('')}
+                        </ul>
+                    `;
+                    skillsGrid.appendChild(categoryDiv);
+                }
+            }
+
+            // Footer
+            setText('lastUpdate', config.footer.lastUpdated);
+        });
+    </script>
+</body>
+</html>

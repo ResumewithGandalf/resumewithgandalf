@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link id="favicon" rel="icon" href="/images/favicon.png" type="image/png">
+    <style>
+        /* --- CSS Variables --- */
+        :root {
+            --font-heading: 'Roboto Slab', serif;
+            --font-sans: 'Open Sans', sans-serif;
+
+            /* Light Theme Defaults (will be overridden by JS from config) */
+            --primary-color: #3498db;
+            --primary-color-rgb: 52, 152, 219;  /* RGB values for primary color */
+            --secondary-color: #2c3e50;
+            --page-background-color: #ecf0f1;
+            --sidebar-background-color: #ffffff;
+            --main-content-background-color: #ffffff;
+            --text-color: #2c3e50;
+            --subtext-color: #7f8c8d;
+            --border-color: #bdc3c7;
+            --card-shadow: rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode {
+            /* Dark Theme Defaults (will be overridden by JS from config) */
+            --primary-color: #3498db; /* Example, will be updated */
+            --secondary-color: #ecf0f1; /* Example, will be updated */
+            --page-background-color: #2c3e50; /* Example, will be updated */
+            --sidebar-background-color: #34495e; /* Example, will be updated */
+            --main-content-background-color: #34495e; /* Example, will be updated */
+            --text-color: #ecf0f1; /* Example, will be updated */
+            --subtext-color: #95a5a6; /* Example, will be updated */
+            --border-color: #7f8c8d; /* Example, will be updated */
+            --card-shadow: rgba(0, 0, 0, 0.2); /* Example, will be updated */
+        }
+
+        /* --- Base Styles --- */
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--page-background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            background-color: var(--main-content-background-color); /* Fallback for overall container */
+        }
+
+        /* --- Sidebar Styles --- */
+        #sidebar {
+            background-color: var(--sidebar-background-color);
+            color: var(--text-color); /* Sidebar text color can be same as main or different */
+        }
+        #profileImage {
+            border-color: var(--primary-color);
+        }
+        .sidebar-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem; /* text-lg */
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem; /* mb-3 */
+            padding-bottom: 0.25rem; /* pb-1 */
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+        }
+        #contactList li, #languagesListSidebar li { /* Removed #educationListSidebar li as it's not in HTML structure */
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem; /* text-sm */
+        }
+        #contactList li i, #languagesListSidebar li i { /* Removed #educationListSidebar li i */
+            color: var(--primary-color);
+            width: 1.5em;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+        #skillsListContainer .skill-category-title {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.25rem;
+        }
+        #skillsListContainer .skill-items {
+            font-size: 0.875rem;
+            color: var(--subtext-color);
+        }
+        #interestsText {
+            color: var(--subtext-color);
+        }
+
+        /* --- Main Content Styles --- */
+        #main-content {
+            background-color: var(--main-content-background-color);
+            color: var(--text-color);
+        }
+        .main-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem; /* mb-6 */
+            padding-bottom: 0.5rem; /* pb-2 */
+            border-bottom: 3px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        .main-section-title i {
+            margin-right: 0.75rem; /* Space between icon and title text */
+        }
+
+        /* Experience Item Styling */
+        .experience-item {
+            margin-bottom: 1.5rem; /* mb-6, space between items */
+            padding-left: 1.5rem; /* pl-6, for the timeline effect */
+            position: relative;
+            border-left: 2px solid var(--border-color);
+        }
+        .experience-item::before { /* Timeline dot */
+            content: '';
+            position: absolute;
+            left: -0.45rem; /* Adjust to center on the border */
+            top: 0.25rem; /* Align with first line of text */
+            width: 0.8rem;
+            height: 0.8rem;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid var(--main-content-background-color); /* Creates a "hole punch" effect */
+        }
+        .experience-item-title {
+            font-family: var(--font-heading);
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .experience-item-company {
+            font-size: 1rem; /* text-base */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .experience-item-meta {
+            font-size: 0.875rem; /* text-sm */
+            color: var(--subtext-color);
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .experience-item-summary {
+            font-size: 0.9rem;
+            color: var(--subtext-color);
+            margin-bottom: 0.5rem;
+        }
+        .experience-item-responsibilities {
+            list-style: disc;
+            padding-left: 1.25rem; /* pl-5 */
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        /* Project Card Styling */
+        .project-card {
+            background-color: var(--sidebar-background-color); /* Use sidebar bg for contrast or card-specific bg */
+            border: 1px solid var(--border-color);
+            padding: 1rem; /* p-4 */
+            border-radius: 0.375rem; /* rounded-md */
+            box-shadow: 0 2px 4px 0 var(--card-shadow);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px 0 var(--card-shadow);
+        }
+        .project-name {
+            font-family: var(--font-heading);
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .project-tech {
+            font-size: 0.8rem; /* text-xs */
+            color: var(--subtext-color);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .project-description {
+            font-size: 0.875rem; /* text-sm */
+            margin-bottom: 0.75rem;
+        }
+        .project-links a {
+            font-size: 0.875rem;
+            margin-right: 0.75rem;
+            color: var(--primary-color);
+        }
+        .project-links a i {
+            margin-right: 0.25rem;
+        }
+
+        /* Publication Item Styling */
+        .publication-item {
+            margin-bottom: 1rem;
+        }
+        .publication-title {
+            font-family: var(--font-heading);
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .publication-authors, .publication-venue { /* Removed .publication-year as it's part of .publication-venue in JS */
+            font-size: 0.875rem; /* text-sm */
+            color: var(--subtext-color);
+        }
+        .publication-link {
+            font-size: 0.875rem;
+            color: var(--primary-color);
+        }
+
+        /* --- Links & Theme Toggle --- */
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        #theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        /* Education Item Styling in Main Content */
+        .education-item {
+            background-color: var(--sidebar-background-color);
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+
+        .education-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--card-shadow);
+        }
+
+        .education-header {
+            margin-bottom: 1rem;
+        }
+
+        .education-degree {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .education-period {
+            font-size: 0.875rem;
+            color: var(--subtext-color);
+            padding: 0.25rem 0.75rem;
+            background-color: var(--page-background-color); /* Or use rgba with --primary-color-rgb if dynamically updated */
+            border-radius: 1rem;
+        }
+
+        .education-gpa {
+            display: inline-block;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(var(--primary-color-rgb), 0.1); /* Uses default --primary-color-rgb */
+            border-radius: 0.25rem;
+        }
+
+        .education-details {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+        }
+
+        .education-achievements {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .education-achievements li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-color);
+        }
+
+        .education-achievements li i {
+            color: var(--primary-color);
+            margin-top: 0.25rem;
+        }
+
+        /* --- Print Styles --- */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 9pt; /* Smaller font for print */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .resume-container {
+                max-width: 100% !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+            .print\:w-1\/3 { width: 33.333333% !important; }
+            .print\:w-2\/3 { width: 66.666667% !important; }
+            #sidebar, #main-content {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                padding: 0.5cm !important; /* Reduced padding for print */
+            }
+            #sidebar {
+                border-right: 1px solid #dddddd;
+            }
+            .no-print, #theme-toggle {
+                display: none !important;
+            }
+            h1, h2, h3, h4, p, li, a, span { /* Removed i from this list as some icons are desired in print, some not */
+                color: #000000 !important;
+            }
+            /* Selectively ensure icons are black in print if they are colored by --primary-color */
+            #contactList li i, #languagesListSidebar li i, .education-achievements li i {
+                 color: #000000 !important;
+            }
+            .sidebar-section-title, .main-section-title {
+                border-color: #666666 !important;
+            }
+            #profileImage {
+                 border-color: #666666 !important;
+            }
+            .main-section-title > i { display: none; } /* Hide icons in main section titles for print */
+            .experience-item {
+                border-left-color: #cccccc !important;
+                page-break-inside: avoid;
+            }
+            .experience-item::before {
+                background-color: #000000 !important;
+                border-color: #ffffff !important;
+            }
+            .project-card {
+                border-color: #cccccc !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+                background-color: #f9f9f9 !important; /* Light bg for cards in print */
+            }
+            a {
+                text-decoration: underline !important;
+                color: #000000 !important;
+            }
+            .project-links a::after { /* Show full link for print */
+                content: " (" attr(href) ")";
+                font-size: 0.8em;
+                color: #333333 !important;
+            }
+             /* Print styles for main education section */
+            .education-item {
+                break-inside: avoid;
+                border-left-color: #666666 !important;
+                background-color: #ffffff !important;
+                box-shadow: none !important;
+            }
+            .education-period, .education-gpa { /* Ensure backgrounds are simple for print */
+                background-color: #f5f5f5 !important;
+            }
+            #page-footer { display: block; } /* Ensure footer is visible for print if desired */
+        }
+    </style>
+</head>
+<body class="bg-page-background text-page-text transition-colors duration-300">
+
+    <div class="resume-container mx-auto my-8 lg:my-12 max-w-6xl flex flex-col lg:flex-row shadow-2xl rounded-lg overflow-hidden">
+
+        <aside id="sidebar" class="w-full lg:w-1/3 xl:w-1/4 bg-sidebar-background text-sidebar-text p-6 lg:p-8 print:w-1/3">
+            <div class="sidebar-sticky-content lg:sticky lg:top-8">
+                <button id="theme-toggle" aria-label="Toggle dark mode" class="absolute top-4 right-4 p-1.5 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-color bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 no-print z-50">
+                    <i id="theme-toggle-icon" class="fas fa-sun text-md"></i>
+                </button>
+
+                <div id="profile-section" class="text-center mb-8">
+                    <img id="profileImage" src="https://placehold.co/160x160/cccccc/333333?text=Profile" alt="Profile Picture"
+                        class="rounded-full w-32 h-32 lg:w-40 lg:h-40 mx-auto mb-4 shadow-lg object-cover border-4 border-primary-color">
+                    <h1 id="userName" class="text-3xl font-bold text-primary-color font-heading"></h1>
+                    <p id="userTitle" class="text-lg text-subtext-color font-sans"></p>
+                </div>
+
+                <section id="sidebar-about-section" class="mb-6">
+                    <h2 class="sidebar-section-title">About Me</h2>
+                    <p id="sidebarAboutMeText" class="text-sm leading-relaxed"></p>
+                </section>
+
+                <section id="sidebar-contact-section" class="mb-6">
+                    <h2 class="sidebar-section-title">Contact</h2>
+                    <ul id="contactList" class="space-y-2 text-sm"></ul>
+                </section>
+
+                <section id="sidebar-skills-section" class="mb-6">
+                    <h2 class="sidebar-section-title">Skills</h2>
+                    <div id="skillsListContainer" class="space-y-3"></div>
+                </section>
+
+                <section id="sidebar-languages-section" class="mb-6">
+                    <h2 class="sidebar-section-title">Languages</h2>
+                    <ul id="languagesListSidebar" class="space-y-1"></ul>
+                </section>
+
+                <section id="sidebar-interests-section">
+                    <h2 class="sidebar-section-title">Interests</h2>
+                    <p id="interestsText" class="text-sm leading-relaxed"></p>
+                </section>
+            </div>
+        </aside>
+
+        <main id="main-content" class="w-full lg:w-2/3 xl:w-3/4 bg-main-content-background text-main-content-text p-6 lg:p-10 print:w-2/3">
+
+            <section id="main-education-section" class="mb-8">
+                <h2 class="main-section-title"><i class="fas fa-graduation-cap mr-2"></i>Education</h2>
+                <div id="educationListMain" class="space-y-6"></div>
+            </section>
+
+            <section id="main-experience-section" class="mb-8">
+                <h2 class="main-section-title"><i class="fas fa-briefcase mr-2"></i>Experience</h2>
+                <div id="experienceListContainer" class="space-y-6"></div>
+            </section>
+
+            <section id="main-projects-section" class="mb-8">
+                <h2 class="main-section-title"><i class="fas fa-project-diagram mr-2"></i>Projects</h2>
+                <div id="projectsListContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </section>
+
+            <section id="main-publications-section" class="mb-8">
+                <h2 class="main-section-title"><i class="fas fa-book-open mr-2"></i>Publications</h2>
+                <div id="publicationsListContainer" class="space-y-4"></div>
+            </section>
+
+            <footer id="page-footer" class="text-center text-xs text-subtext-color mt-12 pt-6 border-t border-border-color no-print">
+                <p id="footerText"></p>
+                 </footer>
+        </main>
+    </div>
+
+    <script>
+        // Embedded data from data.json
+        const embeddedData = {
+          "personalInfo": {
+            "name": "Aragorn II Elessar Telcontar",
+            "title": "King of the Reunited Kingdom of Arnor and Gondor, Chieftain of the Dúnedain",
+            "profileImage": "/images/aragorn_elessar_profile.jpg",
+            "email": "elessar.king@reunitedkingdom.gov.me",
+            "phone": "By Royal Messenger or Raven Post",
+            "websiteLabel": "TheChroniclesOfElessar.me",
+            "websiteURL": "https://thechroniclesofelessar.me",
+            "linkedinUser": "AragornElessarTelcontar",
+            "linkedinURL": "https://middle-earth.linkedin.com/in/AragornElessarTelcontar",
+            "githubUser": "ElessarStonehand",
+            "githubURL": "https://github.com/ElessarStonehand/KingdomRestoration",
+            "location": "Minas Tirith, Gondor (Formerly of Arnor, Rivendell, and the Wilds)"
+          },
+          "themeSettings": {
+            "light": {
+              "primaryColor": "#2c5282",
+              "secondaryColor": "#718096",
+              "backgroundColor": "#f7fafc",
+              "sidebarBackgroundColor": "#ffffff",
+              "mainContentBackgroundColor": "#ffffff",
+              "textColor": "#2d3748",
+              "subtextColor": "#4a5568",
+              "borderColor": "#e2e8f0",
+              "cardShadow": "rgba(0, 0, 0, 0.05)"
+            },
+            "dark": {
+              "primaryColor": "#63b3ed",
+              "secondaryColor": "#a0aec0",
+              "backgroundColor": "#1a202c",
+              "sidebarBackgroundColor": "#2d3748",
+              "mainContentBackgroundColor": "#2d3748",
+              "textColor": "#e2e8f0",
+              "subtextColor": "#a0aec0",
+              "borderColor": "#4a5568",
+              "cardShadow": "rgba(0, 0, 0, 0.2)"
+            }
+          },
+          "sections": {
+            "sidebar": {
+              "aboutMe": "Heir of Isildur and rightful King of Arnor and Gondor. Known also as Strider, Thorongil, and Elessar. Proven leader in the War of the Ring, dedicated to the restoration of peace, justice, and the lineage of Kings in Middle-earth. Now focused on the prosperity and unity of the Reunited Kingdom.",
+              "contact": true,
+              "skills": [
+                {
+                  "category": "Combat & Ranger Proficiencies",
+                  "items": ["Master Swordsmanship (Andúril, Flame of the West)", "Expert Tracking & Wilderness Survival", "Stealth & Reconnaissance", "Bowmanship (Advanced)", "Herbalism & Field Medicine (Athelas Lore)", "Leadership in Battle"]
+                },
+                {
+                  "category": "Royal & Governance Skills",
+                  "items": ["Strategic Command & Grand Strategy", "Diplomacy & Alliance Management", "Royal Decree & Lawmaking", "Ancient Lore & Prophetic Interpretation", "Public Oration & Inspiration", "Kingdom Administration"]
+                }
+              ],
+              "education": [
+                {
+                  "degree": "Stewardship in Lore, Wisdom, and Martial Prowess",
+                  "institution": "Household of Elrond Peredhil, Rivendell (Imladris)",
+                  "period": "T.A. 2933 - T.A. 2951 (Upbringing & Early Training)",
+                  "gpa": "Exemplary in Lineage and Tutelage",
+                  "details": "Intensive instruction in Elven history, languages (Sindarin, Quenya), healing arts, and the traditions of the Dúnedain. Mentored by Elrond and fostered alongside Elladan and Elrohir.",
+                  "achievements": [
+                    "Revealed true lineage as Isildur's Heir.",
+                    "Mastered the histories and prophecies concerning the Dúnedain.",
+                    "Received the Ring of Barahir and shards of Narsil."
+                  ]
+                },
+                {
+                  "degree": "Chieftain of the Dúnedain of the North",
+                  "institution": "The Rangers of the North, Eriador",
+                  "period": "T.A. 2953 - T.A. 3019",
+                  "gpa": "Unmatched Leadership in the Wild",
+                  "details": "Commanded the remaining Dúnedain of Arnor, protecting the northern lands from servants of the Enemy. Undertook numerous perilous journeys and missions.",
+                  "achievements": [
+                    "Successfully defended the borders of the Shire and Bree-land for decades.",
+                    "Hunted Gollum across Middle-earth at the behest of Gandalf.",
+                    "Gained extensive knowledge of the enemy's movements and the geography of Middle-earth."
+                  ]
+                }
+              ],
+              "languages": [
+                { "name": "Westron (Common Speech)", "level": "Native Fluency" },
+                { "name": "Sindarin (Elvish)", "level": "Fluent (Spoken & Written)" },
+                { "name": "Quenya (High-Elven)", "level": "Proficient (Lore & Ceremony)" },
+                { "name": "Rohirric", "level": "Conversational Understanding" },
+                { "name": "Various Mannish Dialects", "level": "Working Knowledge" }
+              ],
+              "interests": ["The Lay of Lúthien & Beren", "Pipe-weed (Longbottom Leaf preferred)", "Stargazing & Astronomy", "Ancient Noldorin Lore", "Rebuilding the Great Libraries of Gondor", "Maintaining Peace with Harad and Rhûn"]
+            },
+            "main": {
+              "experience": [
+                {
+                  "title": "High King of the Reunited Kingdom of Arnor and Gondor",
+                  "company": "The Reunited Kingdom",
+                  "location": "Minas Tirith (Gondor) & Annúminas (Arnor)",
+                  "period": "1 May T.A. 3019 (or F.A. 1) – F.A. 120",
+                  "summary": "Ascended to the throne after the War of the Ring, uniting the ancient Númenórean realms. Ruled for 122 years, establishing an era of peace, justice, and renewal across Middle-earth.",
+                  "responsibilities": [
+                    "Re-established and administered laws, ensuring justice and order throughout the vast kingdom.",
+                    "Commanded the Royal Armies, securing borders and undertaking campaigns to quell remaining evils.",
+                    "Forged and maintained strong alliances with Rohan, the Dwarves of the Lonely Mountain, and the Elves.",
+                    "Oversaw the rebuilding of Minas Tirith, Osgiliath, and Annúminas; replanted the White Tree of Gondor.",
+                    "Married Arwen Undómiel, daughter of Elrond, uniting the lines of Men and Elves."
+                  ]
+                },
+                {
+                  "title": "Leader in the Fellowship of the Ring & Captain of the Host of the West",
+                  "company": "The Council of Elrond / Allied Forces of the Free Peoples",
+                  "location": "Across Eriador, Rhovanion, Rohan, Gondor, and Mordor",
+                  "period": "T.A. 3018 – T.A. 3019",
+                  "summary": "A pivotal figure in the quest to destroy the One Ring and in the subsequent military campaigns against Sauron.",
+                  "responsibilities": [
+                    "Guided the Fellowship from Rivendell, assuming leadership after Gandalf's fall in Moria.",
+                    "Led the Rohirrim and the Dúnedain at the Battle of the Hornburg (Helm's Deep).",
+                    "Commanded the Army of the Dead, liberating Pelargir and reinforcing Minas Tirith.",
+                    "Wielded Andúril, reforged from Narsil, as a symbol of hope and rightful authority.",
+                    "Strategically led the significantly outnumbered Host of the West to the Black Gate to divert Sauron's attention, enabling the Ring-bearer's success."
+                  ]
+                },
+                {
+                  "title": "Ranger of the North (as 'Strider') & Captain 'Thorongil'",
+                  "company": "Dúnedain of the North / Armies of Rohan & Gondor (incognito)",
+                  "location": "Eriador, Rohan, Gondor, and the wider Middle-earth",
+                  "period": "c. T.A. 2953 – T.A. 3018 (as Strider); c. T.A. 2957 – T.A. 2980 (as Thorongil)",
+                  "summary": "Lived a hard life in the wild, protecting the innocent and fighting the servants of Sauron. Served in disguise in the south, gaining renown as a great captain.",
+                  "responsibilities": [
+                    "Patrolled the borders of Eriador, safeguarding regions like the Shire and Bree.",
+                    "As Thorongil, served Steward Ecthelion II of Gondor and King Thengel of Rohan, advising them and leading forces in battle, including a major raid on Umbar.",
+                    "Tracked and captured Gollum in the Dead Marshes.",
+                    "Kept his lineage and destiny hidden until the time was right."
+                  ]
+                }
+              ],
+              "projects": [
+                {
+                  "name": "The Restoration of the United Kingdom & its Capitals",
+                  "technologies": "Royal Charters, Strategic Urban Planning, Masonry & Engineering, Diplomacy, Kingsfoil (Athelas)",
+                  "link": "#",
+                  "githubLink": "https://github.com/ElessarStonehand/KingdomRestoration/tree/main/MinasTirithProject",
+                  "description": "The comprehensive rebuilding and repopulation of major cities including Minas Tirith and Annúminas, the restoration of the White Tree, and the re-establishment of ancient borders and traditions."
+                },
+                {
+                  "name": "The Forging of Andúril, Flame of the West",
+                  "technologies": "Elven Smithing (Rivendell), Ancient Shards (Narsil), Prophecy Fulfillment",
+                  "link": "#",
+                  "githubLink": "#",
+                  "description": "The reforging of the Sword That Was Broken into Andúril, a symbol of kingship and a potent weapon against the Shadow, carried throughout the War of the Ring."
+                },
+                {
+                  "name": "The Grey Company's Journey & The Paths of the Dead",
+                  "technologies": "Ancient Oath-Breaking Lore, Dúnedain Kinship, Courage, Royal Authority",
+                  "link": null, /* Modified to null as an example if no link */
+                  "githubLink": "#",
+                  "description": "Led a company of Dúnedain through the haunted Paths of the Dead to summon the Oathbreakers, who then fulfilled their pledge by routing the Corsairs of Umbar at Pelargir."
+                }
+              ],
+              "publications": [
+                 {
+                    "title": "The Proclamations of Elessar: A Compendium of Laws and Judgements for the Fourth Age",
+                    "authors": "By Order of His Majesty, King Elessar Telcontar. Scribed by the Royal Chancellery.",
+                    "venue": "The Great Library of Minas Tirith & The Royal Archives of Annúminas",
+                    "year": "F.A. 1 - F.A. 120",
+                    "link": "#",
+                    "linkText": "Access Royal Archives (Authorized Personnel)"
+                 },
+                 {
+                    "title": "A Treatise on the Uses of Athelas (Kingsfoil)",
+                    "authors": "King Elessar (based on ancient lore and personal experience)",
+                    "venue": "Informal circulation among Healers of Gondor",
+                    "year": "Early Fourth Age",
+                    "link": null, /* Modified to null */
+                    "linkText": "" /* Modified to empty */
+                 }
+              ]
+            }
+          },
+          "footer": {
+            "text": "Reign Concluded: March 1st, Fourth Age 120. Last updated by the Royal Scribes.",
+            "repoLink": "https://github.com/MiddleEarthChroniclers/RecordsOfElessar",
+            "repoLinkText": "View Historical Archives"
+          }
+        };
+
+        // JavaScript from main.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const themeToggleIcon = document.getElementById('theme-toggle-icon');
+            let configData = {}; // Store loaded config (will be populated by embeddedData)
+
+            // --- Theme Management ---
+            function applyThemeColors(themeConfig) {
+                const root = document.documentElement.style;
+                root.setProperty('--primary-color', themeConfig.primaryColor);
+                root.setProperty('--secondary-color', themeConfig.secondaryColor);
+                root.setProperty('--page-background-color', themeConfig.backgroundColor);
+                root.setProperty('--sidebar-background-color', themeConfig.sidebarBackgroundColor);
+                root.setProperty('--main-content-background-color', themeConfig.mainContentBackgroundColor);
+                root.setProperty('--text-color', themeConfig.textColor);
+                root.setProperty('--subtext-color', themeConfig.subtextColor);
+                root.setProperty('--border-color', themeConfig.borderColor);
+                root.setProperty('--card-shadow', themeConfig.cardShadow);
+            }
+
+            function setTheme(isDark) {
+                const bodyClassList = document.body.classList;
+                if (isDark) {
+                    bodyClassList.add('dark-mode');
+                    themeToggleIcon.classList.remove('fa-sun');
+                    themeToggleIcon.classList.add('fa-moon');
+                    if (configData.themeSettings) applyThemeColors(configData.themeSettings.dark);
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    bodyClassList.remove('dark-mode');
+                    themeToggleIcon.classList.remove('fa-moon');
+                    themeToggleIcon.classList.add('fa-sun');
+                    if (configData.themeSettings) applyThemeColors(configData.themeSettings.light);
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+
+            if (themeToggleButton && themeToggleIcon) {
+                themeToggleButton.addEventListener('click', () => {
+                    setTheme(!document.body.classList.contains('dark-mode'));
+                });
+            }
+
+
+            // --- Helper to set text content ---
+            function setText(elementId, text) {
+                const element = document.getElementById(elementId);
+                if (element) element.textContent = text || '';
+            }
+            function setHtml(elementId, html) {
+                const element = document.getElementById(elementId);
+                if (element) element.innerHTML = html || '';
+            }
+            function setSrc(elementId, src) {
+                const element = document.getElementById(elementId);
+                if (element) element.src = src || '';
+            }
+            function setHref(elementId, href) { // Not used in current populateResume but good utility
+                const element = document.getElementById(elementId);
+                if (element) element.href = href || '#';
+            }
+
+            // --- Populate Resume ---
+            function populateResume(data) {
+                configData = data; // Store for theme switcher and other potential uses
+                const pi = data.personalInfo;
+                const sections = data.sections;
+
+                // Page Title & Favicon
+                setText('pageTitle', `${pi.name} - Resume`);
+                setSrc('favicon', pi.faviconPath || 'images/favicon.png'); // data.json doesn't have faviconPath, uses fallback
+
+                // Sidebar: Profile
+                setSrc('profileImage', pi.profileImage); // Uses path from data.json
+                setText('userName', pi.name);
+                setText('userTitle', pi.title);
+
+                // Sidebar: About Me
+                if (sections.sidebar && sections.sidebar.aboutMe) {
+                     setText('sidebarAboutMeText', sections.sidebar.aboutMe);
+                }
+
+                // Sidebar: Contact
+                const contactList = document.getElementById('contactList');
+                if (contactList) {
+                    contactList.innerHTML = ''; // Clear existing
+                    if (pi.location) contactList.innerHTML += `<li><i class="fas fa-map-marker-alt fa-fw"></i> ${pi.location}</li>`;
+                    if (pi.phone) contactList.innerHTML += `<li><a href="tel:${pi.phone.replace(/\D/g,'')}"><i class="fas fa-phone-alt fa-fw"></i> ${pi.phone}</a></li>`;
+                    if (pi.email) contactList.innerHTML += `<li><a href="mailto:${pi.email}"><i class="fas fa-envelope fa-fw"></i> ${pi.email}</a></li>`;
+                    if (pi.websiteURL && pi.websiteLabel) contactList.innerHTML += `<li><a href="${pi.websiteURL}" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe fa-fw"></i> ${pi.websiteLabel}</a></li>`;
+                    if (pi.linkedinURL && pi.linkedinUser) contactList.innerHTML += `<li><a href="${pi.linkedinURL}" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in fa-fw"></i> ${pi.linkedinUser}</a></li>`;
+                    if (pi.githubURL && pi.githubUser) contactList.innerHTML += `<li><a href="${pi.githubURL}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github fa-fw"></i> ${pi.githubUser}</a></li>`;
+                }
+
+                // Sidebar: Skills
+                const skillsListContainer = document.getElementById('skillsListContainer');
+                if (skillsListContainer && sections.sidebar && sections.sidebar.skills) {
+                    skillsListContainer.innerHTML = '';
+                    sections.sidebar.skills.forEach(skillGroup => {
+                        const groupDiv = document.createElement('div');
+                        groupDiv.innerHTML = `<h4 class="skill-category-title">${skillGroup.category}</h4>
+                                          <p class="skill-items">${Array.isArray(skillGroup.items) ? skillGroup.items.join(', ') : skillGroup.items}</p>`;
+                        skillsListContainer.appendChild(groupDiv);
+                    });
+                }
+
+                // Sidebar: Languages
+                const languagesListSidebar = document.getElementById('languagesListSidebar');
+                if (languagesListSidebar && sections.sidebar && sections.sidebar.languages) {
+                    languagesListSidebar.innerHTML = '';
+                    sections.sidebar.languages.forEach(lang => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `${lang.name}: <span class="text-subtext-color">${lang.level}</span>`; // text-subtext-color might need to be a class in CSS if var isn't picked up
+                        languagesListSidebar.appendChild(li);
+                    });
+                }
+
+                // Sidebar: Interests
+                if (sections.sidebar && sections.sidebar.interests) {
+                     setText('interestsText', Array.isArray(sections.sidebar.interests) ? sections.sidebar.interests.join(', ') : sections.sidebar.interests);
+                }
+
+
+                // Main Content: Education (uses sections.sidebar.education from data.json)
+                const educationListMain = document.getElementById('educationListMain');
+                if (educationListMain && sections.sidebar && sections.sidebar.education) {
+                    educationListMain.innerHTML = '';
+                    sections.sidebar.education.forEach(edu => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'education-item';
+                        itemDiv.innerHTML = `
+                            <div class="education-header">
+                                <h3 class="education-degree">${edu.degree}</h3>
+                                <div class="education-meta">
+                                    <span class="education-institution">${edu.institution}</span>
+                                    <span class="education-period">${edu.period}</span>
+                                </div>
+                            </div>
+                            ${edu.gpa ? `<div class="education-gpa">GPA: ${edu.gpa}</div>` : ''}
+                            ${edu.details ? `<div class="education-details">${edu.details}</div>` : ''}
+                            ${edu.achievements && edu.achievements.length > 0 ? `
+                                <ul class="education-achievements">
+                                    ${edu.achievements.map(achievement => `
+                                        <li><i class="fas fa-check text-primary-color"></i> ${achievement}</li>
+                                    `).join('')}
+                                </ul>
+                            ` : ''}
+                        `;
+                        educationListMain.appendChild(itemDiv);
+                    });
+                }
+
+                // Main Content: Experience
+                const experienceListContainer = document.getElementById('experienceListContainer');
+                if (experienceListContainer && sections.main && sections.main.experience) {
+                    experienceListContainer.innerHTML = '';
+                    sections.main.experience.forEach(exp => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'experience-item';
+                        itemDiv.innerHTML = `
+                            <h3 class="experience-item-title">${exp.title}</h3>
+                            <p class="experience-item-company">${exp.company}</p>
+                            <p class="experience-item-meta">${exp.location} | ${exp.period}</p>
+                            ${exp.summary ? `<p class="experience-item-summary">${exp.summary}</p>` : ''}
+                            <ul class="experience-item-responsibilities">
+                                ${exp.responsibilities.map(r => `<li>${r}</li>`).join('')}
+                            </ul>`;
+                        experienceListContainer.appendChild(itemDiv);
+                    });
+                }
+
+                // Main Content: Projects
+                const projectsListContainer = document.getElementById('projectsListContainer');
+                if (projectsListContainer && sections.main && sections.main.projects) {
+                    projectsListContainer.innerHTML = '';
+                    sections.main.projects.forEach(proj => {
+                        const cardDiv = document.createElement('div');
+                        cardDiv.className = 'project-card';
+                        cardDiv.innerHTML = `
+                            <h3 class="project-name">${proj.name}</h3>
+                            <p class="project-tech">${proj.technologies}</p>
+                            <p class="project-description">${proj.description}</p>
+                            <div class="project-links mt-2">
+                                ${proj.link && proj.link !== "#" ? `<a href="${proj.link}" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+                                ${proj.githubLink && proj.githubLink !== "#" ? `<a href="${proj.githubLink}" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>` : ''}
+                            </div>`;
+                        projectsListContainer.appendChild(cardDiv);
+                    });
+                }
+
+                // Main Content: Publications
+                const publicationsListContainer = document.getElementById('publicationsListContainer');
+                if (publicationsListContainer && sections.main && sections.main.publications) {
+                    publicationsListContainer.innerHTML = '';
+                    sections.main.publications.forEach(pub => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'publication-item';
+                        itemDiv.innerHTML = `
+                            <h4 class="publication-title">${pub.title}</h4>
+                            <p class="publication-authors">${pub.authors}</p>
+                            <p class="publication-venue">${pub.venue} (${pub.year})</p>
+                            ${pub.link && pub.linkText && pub.link !== "#" ? `<a href="${pub.link}" target="_blank" rel="noopener noreferrer" class="publication-link">${pub.linkText} <i class="fas fa-external-link-alt fa-xs"></i></a>` : ''}`;
+                        publicationsListContainer.appendChild(itemDiv);
+                    });
+                }
+
+                // Footer
+                if (data.footer) {
+                    setText('footerText', data.footer.text);
+                    const footerRepoLink = document.getElementById('footerRepoLink'); // This ID is commented out in HTML
+                    if (footerRepoLink && data.footer.repoLink && data.footer.repoLinkText) {
+                        footerRepoLink.href = data.footer.repoLink;
+                        footerRepoLink.textContent = data.footer.repoLinkText;
+                    }
+                }
+
+
+                // Set Initial Theme
+                const preferredTheme = localStorage.getItem('theme');
+                const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                setTheme(preferredTheme === 'dark' || (!preferredTheme && systemPrefersDark));
+            }
+
+            // Load and Populate Data using embeddedData
+            try {
+                if (!embeddedData || !embeddedData.personalInfo || !embeddedData.themeSettings) {
+                    throw new Error('Invalid data format in embedded data.json. Missing critical sections.');
+                }
+                populateResume(embeddedData);
+            } catch (error) {
+                console.error('Error processing embedded resume data:', error);
+                const mainContent = document.getElementById('main-content') || document.body;
+                mainContent.innerHTML = `<p class="text-red-500 text-center p-8 font-bold">Error: Could not load resume data. (Details in console: ${error.message})</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
