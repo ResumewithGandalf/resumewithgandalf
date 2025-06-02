@@ -107,6 +107,49 @@ html[data-theme="dark"] body::before {
     }
 }
 
+@media (max-width: 600px) {
+  .logo-container {
+    position: static;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px auto;
+    display: block;
+    box-shadow: none;
+  }
+  #theme-toggle {
+    position: static;
+    width: 100%;
+    margin: 0 0 16px 0;
+    display: flex;
+    justify-content: center;
+    top: unset;
+    right: unset;
+    border-radius: 20px;
+    font-size: 1rem;
+  }
+  #resume-template-showcase {
+    padding: 20px 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  .title-container {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  #resume-template-showcase h2 {
+    font-size: 1.5em;
+  }
+  .template-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .template-card {
+    padding: 12px;
+  }
+}
+
 #theme-toggle {
     position: fixed;
     top: 20px;
