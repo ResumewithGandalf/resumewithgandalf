@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume with Gandalf - Professional Templates</title>
+    <title></title>
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,271 +12,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
-    <div class="logo-container">
-        <img src="images/logo-light.png" alt="Resume with Gandalf - Light Mode Logo" class="logo-light"
-             onerror="this.src='https://placehold.co/100x100/FAF0E6/5D4037?text=Logo'">
-        <img src="images/logo-dark.png" alt="Resume with Gandalf - Dark Mode Logo" class="logo-dark"
-             onerror="this.src='https://placehold.co/100x100/3E2723/FFF8DC?text=Logo'">
-    </div>
 
-    <button id="theme-toggle">
-        <i class="fas fa-moon"></i>
-        <span>Dark Mode</span>
-    </button>
+<body>
+   
+    <div class="header-bar">
+        <div class="logo-container">
+            <img class="logo-light" alt="Light Mode Logo">
+            <img class="logo-dark" alt="Dark Mode Logo">
+        </div>
+        <button id="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span>
+        </button>
+    </div>
 
     <section id="resume-template-showcase">
         <div class="title-container">
-            <h2>Resume Templates by Gandalf</h2>
+            <!-- Title image and heading will be injected here -->
         </div>
         <p class="showcase-intro text-center">
-            Welcome! Here you'll find resume templates designed with care by Gandalf to help you create a professional and effective resume.
-            Each template is modern, easy to use, and ready for your personal information.
-            Check out the demos.
-            <span class="contact-telegram">
-                For questions or custom designs, contact Gandalf on Telegram: <a href="https://t.me/YourTelegramUsername" target="_blank" rel="noopener noreferrer">@YourTelegramUsername <i class="fab fa-telegram-plane"></i></a>
-            </span>
+            <!-- Intro text and Telegram contact will be injected here -->
         </p>
 
         <div class="template-grid">
-
-            <div class="template-card">
-                <div class="template-image-container">
-                    <img src="images/single-column-light.png"
-                         alt="Clear Single-Column Resume Template Light Mode"
-                         class="template-light"
-                         onerror="this.src='https://placehold.co/600x400/B8860B/FFF8DC?text=Clear+Single-Column'">
-                    <img src="images/single-column-dark.png"
-                         alt="Clear Single-Column Resume Template Dark Mode"
-                         class="template-dark"
-                         onerror="this.src='https://placehold.co/600x400/4E342E/DAA520?text=Clear+Single-Column'">
-                </div>
-                <h3>Clear Single-Column</h3>
-                <p class="template-description">
-                    A clean and focused single-column design. It's easy to read and great for a clear, concise resume. Gandalf helps make sure your details are presented well.
-                </p>
-                <div class="template-links">
-                    <a href="https://YOUR_USERNAME.github.io/single-column-resume-repo-name/" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-eye"></i> View Demo
-                    </a>
-                </div>
-            </div>
-
-            <div class="template-card">
-                <div class="template-image-container">
-                    <img src="images/two-column-light.png"
-                         alt="Modern Two-Column Resume Template Light Mode"
-                         class="template-light"
-                         onload="console.log('Two-column light image loaded successfully')"
-                         onerror="console.error('Failed to load two-column light image:', this.src); this.src='https://placehold.co/600x400/CD853F/FFF8DC?text=Modern+Two-Column'">
-                    <img src="images/two-column-dark.png"
-                         alt="Modern Two-Column Resume Template Dark Mode"
-                         class="template-dark"
-                         onerror="this.src='https://placehold.co/600x400/4E342E/DAA520?text=Modern+Two-Column'">
-                </div>
-                <h3>Modern Two-Column</h3>
-                <p class="template-description">
-                    This template offers a balanced two-column layout. Use the sidebar for key info like contact details and skills, and the main area for your experience and projects. Designed with Gandalf's guidance for a smart look.
-                </p>
-                <div class="template-links">
-                    <a href="https://YOUR_USERNAME.github.io/modern-two-column-repo-name/" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-eye"></i> View Demo
-                    </a>
-                </div>
-            </div>
-
-            <div class="template-card">
-                <div class="template-image-container">
-                    <img src="images/creative-template-light.png" alt="Creative Template Light Mode"
-                         class="template-light"
-                         onerror="this.src='https://placehold.co/600x400/DAA520/3E2723?text=Creative+Template'">
-                    <img src="images/creative-template-dark.png" alt="Creative Template Dark Mode"
-                         class="template-dark"
-                         onerror="this.src='https://placehold.co/600x400/4E342E/DAA520?text=Creative+Template'">
-                </div>
-                <h3>Creative Template</h3>
-                <p class="template-description">
-                    Inspired by modern portfolio styles (like the "Nicol Rider" example), this template offers a visually engaging landing page that links to separate detailed sections. Perfect for making a strong first impression.
-                </p>
-                <div class="template-links">
-                    <a href="https://YOUR_USERNAME.github.io/creative-portfolio-landing-repo-name/" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-eye"></i> View Demo
-                    </a>
-                </div>
-            </div>
-
-            <div class="template-card">
-                <div class="template-image-container">
-                    <img src="images/custom-design-light.png"
-                         alt="Custom Resume Design Service Light Mode"
-                         class="template-light"
-                         onerror="this.src='https://placehold.co/600x400/8B4513/FFF8DC?text=Gandalf%27s+Custom+Designs'">
-                    <img src="images/custom-design-dark.png"
-                         alt="Custom Resume Design Service Dark Mode"
-                         class="template-dark"
-                         onerror="this.src='https://placehold.co/600x400/4E342E/DAA520?text=Gandalf%27s+Custom+Designs'">
-                </div>
-                <h3>Gandalf's Custom Designs</h3>
-                <p class="template-description">
-                    Need a resume that's truly unique? Gandalf can help create a custom design tailored to your specific needs and personal style. Let's make a resume that perfectly tells your story.
-                </p>
-                <div class="template-links">
-                    <a href="https://t.me/YourTelegramUsername" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-telegram-plane"></i> Request Custom Design
-                    </a>
-                </div>
-            </div>
-
+            <!-- Template cards will be injected here -->
         </div>
     </section>
 
-    <div style="padding: 50px; text-align: center; color: var(--text-color);">
-        <h1>Welcome to My Template Archive!</h1>
-        <p style="color: var(--desc-color);">Further tales and treasures await...</p>
+    <div id="footer" style="padding: 50px; text-align: center; color: var(--text-color);">
+        <!-- Footer heading and subtext will be injected here -->
     </div>
 
-    <script>
-        // Load configuration
-        async function loadConfig() {
-            try {
-                const response = await fetch('config.json');
-                const config = await response.json();
-                
-                // Apply site title
-                document.title = config.site.title;
-                
-                // Update favicons
-                if (config.site.favicon) {
-                    const iconLinks = document.querySelectorAll('link[rel="icon"]');
-                    iconLinks.forEach(link => {
-                        if (link.type === 'image/x-icon') {
-                            link.href = config.site.favicon.ico;
-                        } else if (link.type === 'image/png') {
-                            const size = link.sizes.toString();
-                            link.href = config.site.favicon.png.replace('.png', `-${size}.png`);
-                        }
-                    });
-                }
-                
-                // Apply logo size
-                const logoContainer = document.querySelector('.logo-container');
-                logoContainer.style.width = `${config.site.logo.size.width}px`;
-                logoContainer.style.height = `${config.site.logo.size.height}px`;
-                
-                // Update logo images
-                document.querySelector('.logo-light').src = config.site.logo.images.light;
-                document.querySelector('.logo-dark').src = config.site.logo.images.dark;
-                
-                // Update showcase section and handle title image
-                const titleContainer = document.querySelector('.title-container');
-                const heading = document.querySelector('#resume-template-showcase h2');
-                heading.textContent = config.showcase.heading;
-
-                // Handle title image if enabled
-                if (config.showcase.title_image && config.showcase.title_image.enabled) {
-                    const titleImage = document.createElement('img');
-                    titleImage.src = config.showcase.title_image.src;
-                    titleImage.alt = config.showcase.title_image.alt;
-                    titleImage.width = config.showcase.title_image.size.width;
-                    titleImage.height = config.showcase.title_image.size.height;
-                    titleImage.className = `title-image ${config.showcase.title_image.position}`;
-                    
-                    if (config.showcase.title_image.position === 'left') {
-                        titleContainer.insertBefore(titleImage, heading);
-                    } else {
-                        titleContainer.appendChild(titleImage);
-                    }
-                }
-                
-                // Update intro text
-                const introText = document.querySelector('#resume-template-showcase .showcase-intro');
-                introText.childNodes[0].textContent = config.showcase.intro.text;
-                
-                // Update Telegram contact
-                const telegramLink = document.querySelector('.contact-telegram a');
-                telegramLink.href = config.showcase.intro.contact.telegram_url;
-                telegramLink.textContent = config.showcase.intro.contact.telegram;
-                
-                // Update templates
-                const templateGrid = document.querySelector('.template-grid');
-                templateGrid.innerHTML = ''; // Clear existing templates
-                
-                config.templates.forEach(template => {
-                    const templateCard = document.createElement('div');
-                    templateCard.className = 'template-card';
-                    templateCard.innerHTML = `
-                        <div class="template-image-container">
-                            <img src="${template.images.light}"
-                                 alt="${template.title} Light Mode"
-                                 class="template-light"
-                                 onerror="this.src='https://placehold.co/600x400/B8860B/FFF8DC?text=${encodeURIComponent(template.title)}'">
-                            <img src="${template.images.dark}"
-                                 alt="${template.title} Dark Mode"
-                                 class="template-dark"
-                                 onerror="this.src='https://placehold.co/600x400/4E342E/DAA520?text=${encodeURIComponent(template.title)}'">
-                        </div>
-                        <h3>${template.title}</h3>
-                        <p class="template-description">${template.description}</p>
-                        <div class="template-links">
-                            <a href="${template.demo_url}" target="_blank" rel="noopener noreferrer">
-                                <i class="${template.id === 'custom' ? 'fab fa-telegram-plane' : 'fas fa-eye'}"></i>
-                                ${template.id === 'custom' ? 'Request Custom Design' : 'View Demo'}
-                            </a>
-                        </div>
-                    `;
-                    templateGrid.appendChild(templateCard);
-                });
-                
-                // Update footer
-                document.querySelector('div[style*="padding: 50px"] h1').textContent = config.footer.heading;
-                document.querySelector('div[style*="padding: 50px"] p').textContent = config.footer.subtext;
-                
-            } catch (error) {
-                console.error('Error loading configuration:', error);
-            }
-        }
-
-        // Load config when the page loads
-        window.addEventListener('DOMContentLoaded', loadConfig);
-
-        // Theme toggle functionality (existing code)
-        const themeToggle = document.getElementById('theme-toggle');
-        const icon = themeToggle.querySelector('i');
-        const text = themeToggle.querySelector('span');
-        const docElement = document.documentElement;
-
-        function updateToggleButton(theme) {
-            if (theme === 'dark') {
-                icon.className = 'fas fa-sun';
-                text.textContent = 'Light Mode';
-            } else {
-                icon.className = 'fas fa-moon';
-                text.textContent = 'Dark Mode';
-            }
-        }
-
-        const savedTheme = localStorage.getItem('theme') ||
-                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        docElement.setAttribute('data-theme', savedTheme);
-        updateToggleButton(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = docElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            docElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateToggleButton(newTheme);
-        });
-
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (!localStorage.getItem('theme')) {
-                const newTheme = e.matches ? 'dark' : 'light';
-                docElement.setAttribute('data-theme', newTheme);
-                updateToggleButton(newTheme);
-            }
-        });
-    </script>
-
+    <script src="main.js"></script>
 </body>
 </html>
