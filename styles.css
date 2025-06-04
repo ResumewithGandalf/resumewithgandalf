@@ -107,11 +107,17 @@ html[data-theme="dark"] body::before {
     }
 }
 
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
 .logo-container {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 9999;
     width: 100px !important;
     height: 100px !important;
     border-radius: 50%;
@@ -121,10 +127,6 @@ html[data-theme="dark"] body::before {
     border: 2px solid var(--primary-color);
 }
 #theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
     padding: 10px 15px;
     border-radius: 25px;
     border: 1px solid var(--primary-color);
@@ -140,16 +142,16 @@ html[data-theme="dark"] body::before {
 }
 
 @media (max-width: 600px) {
+  .header-bar {
+    padding: 0 8px;
+    margin-top: 8px;
+  }
   .logo-container {
-    top: 8px;
-    left: 8px;
     width: 48px !important;
     height: 48px !important;
     box-shadow: 0 2px 5px rgba(0,0,0,0.08);
   }
   #theme-toggle {
-    top: 8px;
-    right: 8px;
     width: auto;
     min-width: 44px;
     padding: 6px 12px;
@@ -350,32 +352,4 @@ div[style*="padding: 50px"] {
 /* No need for html[data-theme="dark"] div[style*="padding: 50px"] if using the variable */
 div[style*="padding: 50px"] p {
     color: var(--desc-color);
-}
-
-/* Fix content overlap caused by fixed logo and theme button */
-/* Fix content overlap caused by fixed logo and theme button */
-body {
-    padding-top: 130px;
-}
-
-@media (max-width: 600px) {
-    body {
-        padding-top: 120px;
-    }
-}
-
-
-/* Optional improvement: Sticky header elements for better UX */
-.logo-container {
-    position: sticky;
-    top: 15px;
-    left: 15px;
-    z-index: 999;
-}
-
-#theme-toggle {
-    position: sticky;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
 }
