@@ -14,11 +14,11 @@
         }
     },
     "showcase": {
-        "heading": "Resume Templates by Gandalf",
+        "heading": "Gandalf's Premier Resume Templates",
         "intro": {
-            "text": "Welcome! Here you'll find resume templates designed with care by Gandalf to help you create a professional and effective resume. Each template is modern, easy to use, and ready for your personal information. Check out the demos.",
+            "text": "Behold! A collection of meticulously crafted resume templates, forged in the fires of design and guided by ancient wisdom. Choose your path to a legendary career.",
             "contact": {
-                "telegram": "Telegram",
+                "telegram": "Gandalf",
                 "telegram_url": "https://t.me/resumewithgandalf"
             }
         }
@@ -26,8 +26,8 @@
     "templates": [
         {
             "id": "single-column",
-            "title": "Clear Single-Column",
-            "description": "A clean and focused single-column design. It's easy to read and great for a clear, concise resume. Gandalf helps make sure your details are presented well.",
+            "title": "Gimli's Strong Resume (One Page)",
+            "description": "A tough and simple one-page resume, like Gimli the Dwarf. It clearly shows your big wins, your skills (like being good with tools!), and that you're a loyal friend. It's very direct. Good for showing your strength and how you always help out.",
             "images": {
                 "light": "images/single-column-light.png",
                 "dark": "images/single-column-dark.png"
@@ -36,8 +36,8 @@
         },
         {
             "id": "two-column",
-            "title": "Modern Two-Column",
-            "description": "This template offers a balanced two-column layout. Use the sidebar for key info like contact details and skills, and the main area for your experience and projects. Designed with Gandalf's guidance for a smart look.",
+            "title": "Aragorn's Kingly Resume (Two Parts)",
+            "description": " A royal-looking resume with two parts, like Aragorn. It shows your past adventures and your skills as a great leader. It talks about leading, being brave, and helping people. One part for your journeys, the other for your important jobs. Good for leaders who have done many great things.",
             "images": {
                 "light": "images/two-column-light.png",
                 "dark": "images/two-column-dark.png"
@@ -46,8 +46,8 @@
         },
         {
             "id": "creative",
-            "title": "Creative Template",
-            "description": "Inspired by modern portfolio styles , this template offers a visually engaging landing page that links to separate detailed sections. Perfect for making a strong first impression.",
+            "title": "Legolas's Sharp Resume (Creative Style)",
+            "description": "A stylish and quick resume, like the Legolas Greenleaf. It shows you have a good eye for things, you're great at reaching your goals, and you work well. It can link to other pages with more about your best work. Good for people who are quick, smart, and do things with style.",
             "images": {
                 "light": "images/creative-template-light.png",
                 "dark": "images/creative-template-dark.png"
